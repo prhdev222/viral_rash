@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>พระ-เณร สุขภาพดี — คู่มือโรคติดเชื้อสำหรับพระภิกษุและสามเณร</title>
+<link rel="preload" href="images/watwa.jpg" as="image">
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Thai:wght@300;400;500;600;700;800;900&family=Noto+Serif+Thai:wght@400;600;700;900&family=Sarabun:wght@300;400;600;700&display=swap" rel="stylesheet">
 <style>
 :root {
@@ -294,15 +295,16 @@ body::before {
   padding: 4rem 1.5rem;
 }
 
-/* พื้นหลังแต่ละตอน (watmoolee1–7) */
-.section-bg-1 { background-image: url('images/watmoolee1.jpg'); background-size: cover; background-position: center; background-repeat: no-repeat; }
-.section-bg-2 { background-image: url('images/watmoolee2.jpg'); background-size: cover; background-position: center; background-repeat: no-repeat; }
-.section-bg-3 { background-image: url('images/watmoolee3.jpg'); background-size: cover; background-position: center; background-repeat: no-repeat; }
-.section-bg-4 { background-image: url('images/watmoolee4.jpg'); background-size: cover; background-position: center; background-repeat: no-repeat; }
-.section-bg-5 { background-image: url('images/watmoolee5.jpg'); background-size: cover; background-position: center; background-repeat: no-repeat; }
-.section-bg-6 { background-image: url('images/watmoolee6.jpg'); background-size: cover; background-position: center; background-repeat: no-repeat; }
-.section-bg-7 { background-image: url('images/watmoolee7.jpg'); background-size: cover; background-position: center; background-repeat: no-repeat; }
-.section-bg-kid { background-image: url('images/watmoolee_kid2.jpg'); background-size: cover; background-position: center; background-repeat: no-repeat; }
+/* พื้นหลังแต่ละตอน — โหลดเมื่อเลื่อนมาถึง (lazy) ผ่าน JS */
+[data-section-bg] { background-size: cover; background-position: center; background-repeat: no-repeat; }
+.section-bg-1 { }
+.section-bg-2 { }
+.section-bg-3 { }
+.section-bg-4 { }
+.section-bg-5 { }
+.section-bg-6 { }
+.section-bg-7 { }
+.section-bg-kid { }
 .section-bg-1::before,
 .section-bg-2::before,
 .section-bg-3::before,
@@ -1244,7 +1246,7 @@ body::before {
 <div id="content-start"></div>
 
 <!-- ═══════════ ๑. โรคออกผื่นที่ติดต่อง่าย ═══════════ -->
-<section class="section section-bg-1 fade-in" id="diseases">
+<section class="section section-bg-1 fade-in" id="diseases" data-section-bg="images/watmoolee1.jpg">
   <div class="section-header">
     <div class="section-number">บทที่ ๑</div>
     <h2 class="section-title">โรคออกผื่นที่ติดต่อง่าย</h2>
@@ -1483,7 +1485,7 @@ body::before {
 <div class="divider">◆ ◆ ◆</div>
 
 <!-- ═══════════ ตารางเปรียบเทียบ ═══════════ -->
-<section class="section section-bg-2 fade-in" id="compare">
+<section class="section section-bg-2 fade-in" id="compare" data-section-bg="images/watmoolee2.jpg">
   <div class="section-header">
     <div class="section-icon">📊</div>
     <h2 class="section-title">ตารางเปรียบเทียบ ๕ โรค</h2>
@@ -1591,7 +1593,7 @@ body::before {
 <hr class="section-divider">
 
 <!-- ═══════════ ๒. การป้องกันโรค (๕ป.๑ข. / ฉีด-ห่าง-ปิด-เปิด / ซัก-ซุก-ส่อง) ═══════════ -->
-<section class="section section-bg-3 fade-in" id="prevent">
+<section class="section section-bg-3 fade-in" id="prevent" data-section-bg="images/watmoolee3.jpg">
   <div class="section-header">
     <div class="section-number">บทที่ ๒</div>
     <h2 class="section-title">การป้องกันโรค</h2>
@@ -1727,7 +1729,7 @@ body::before {
 <div class="divider">◆ ◆ ◆</div>
 
 <!-- ═══════════ ๓. ยาอันตราย ═══════════ -->
-<section class="section section-bg-4 fade-in" id="medicine">
+<section class="section section-bg-4 fade-in" id="medicine" data-section-bg="images/watmoolee4.jpg">
   <div class="section-header">
     <div class="section-number">บทที่ ๓</div>
     <h2 class="section-title">ยาอันตราย — ห้ามหยิบผิด!</h2>
@@ -1772,7 +1774,7 @@ body::before {
 <hr class="section-divider">
 
 <!-- ═══════════ ๔. สัญญาณเตือน ═══════════ -->
-<section class="section section-bg-5 fade-in" id="warning">
+<section class="section section-bg-5 fade-in" id="warning" data-section-bg="images/watmoolee5.jpg">
   <div class="section-header">
     <div class="section-number">บทที่ ๔</div>
     <h2 class="section-title">สัญญาณเตือน "ระยะวิกฤต"</h2>
@@ -1819,7 +1821,7 @@ body::before {
 <div class="divider">◆ ◆ ◆</div>
 
 <!-- ═══════════ ๕. วัคซีน ═══════════ -->
-<section class="section section-bg-6 fade-in" id="vaccine">
+<section class="section section-bg-6 fade-in" id="vaccine" data-section-bg="images/watmoolee6.jpg">
   <div class="section-header">
     <div class="section-number">บทที่ ๕</div>
     <h2 class="section-title">วัคซีนเสริมแกร่ง ปี ๒๕๖๘–๒๕๖๙</h2>
@@ -1936,7 +1938,7 @@ body::before {
 <hr class="section-divider">
 
 <!-- ═══════════ ๗. เมื่อระบาดทำอย่างไร ═══════════ -->
-<section class="section section-bg-7 fade-in" id="outbreak">
+<section class="section section-bg-7 fade-in" id="outbreak" data-section-bg="images/watmoolee7.jpg">
   <div class="section-header">
     <div class="section-number">บทที่ ๖</div>
     <h2 class="section-title">เมื่อระบาดทำอย่างไร</h2>
@@ -2037,7 +2039,7 @@ body::before {
 <hr class="section-divider">
 
 <!-- ═══════════ เนื้อหาเพิ่มเติม: ข้อปฏิบัติในวัด ═══════════ -->
-<section class="section section-bg-6 fade-in" id="monkcare">
+<section class="section section-bg-6 fade-in" id="monkcare" data-section-bg="images/watmoolee6.jpg">
   <div class="section-header">
     <div class="section-number">เนื้อหาเพิ่มเติม</div>
     <h2 class="section-title">ข้อปฏิบัติดูแลสุขภาพในวัด</h2>
@@ -2121,7 +2123,7 @@ body::before {
 <div class="divider">◆ ◆ ◆</div>
 
 <!-- ═══════════ คำถามที่พบบ่อย ═══════════ -->
-<section class="section section-bg-kid fade-in" id="faq">
+<section class="section section-bg-kid fade-in" id="faq" data-section-bg="images/watmoolee_kid2.jpg">
   <div class="section-header">
     <div class="section-icon">❓</div>
     <h2 class="section-title">คำถามที่พบบ่อย</h2>
@@ -2226,7 +2228,7 @@ body::before {
   <div class="section-header">
     <div class="section-icon">📝</div>
     <h2 class="section-title">แบบทดสอบหลังเรียนรู้</h2>
-    <p class="section-subtitle">ทดสอบความเข้าใจเรื่องหัด หัดเยอรมัน อีสุกอีใส และไข้เลือดออก — บันทึกคะแนนและดูกระดานคะแนนสูงสุด</p>
+    <p class="section-subtitle">ทดสอบความเข้าใจเรื่องหัด หัดเยอรมัน อีสุกอีใส ไข้เลือดออก และหิด — บันทึกคะแนนและดูกระดานคะแนนสูงสุด</p>
   </div>
   <div class="quiz-cta-wrap">
     <a href="quiz.html" class="quiz-cta-btn">ไปทำแบบทดสอบ →</a>
@@ -2262,6 +2264,21 @@ const obs = new IntersectionObserver((entries) => {
 }, { threshold: 0.1 });
 
 document.querySelectorAll('.fade-in').forEach(el => obs.observe(el));
+
+// โหลดรูปพื้นหลัง section เมื่อเลื่อนมาถึง (ลดการโหลดพร้อมกันทั้งหมด)
+const bgObs = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (!e.isIntersecting) return;
+    const el = e.target;
+    const bg = el.getAttribute('data-section-bg');
+    if (bg && !el.dataset.bgLoaded) {
+      el.style.backgroundImage = "url('" + bg + "')";
+      el.dataset.bgLoaded = '1';
+      bgObs.unobserve(el);
+    }
+  });
+}, { rootMargin: '100px', threshold: 0.01 });
+document.querySelectorAll('[data-section-bg]').forEach(el => bgObs.observe(el));
 
 // แกลเลอรีรูปโรค — รายชื่อไฟล์ในโฟลเดอร์ images/ (เพิ่ม/ลดได้ตามไฟล์ที่มี)
 const DISEASE_IMAGES = {

@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>แบบทดสอบหลังเรียนรู้ — สุขภาพสงฆ์</title>
+<link rel="preload" href="images/watmoolee1.jpg" as="image">
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Thai:wght@300;400;500;600;700;800;900&family=Noto+Serif+Thai:wght@400;600;700;900&family=Sarabun:wght@300;400;600;700&display=swap" rel="stylesheet">
 <style>
 :root {
@@ -231,6 +232,13 @@ body::before {
   border: 2px solid var(--maroon);
 }
 .btn-outline:hover { background: var(--maroon); color: #FFF; }
+
+.btn-secondary {
+  background: linear-gradient(135deg, var(--maroon-deep), var(--maroon));
+  color: #FFF;
+  box-shadow: 0 4px 16px rgba(107, 29, 29, 0.25);
+}
+.btn-secondary:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(107, 29, 29, 0.35); }
 
 /* ── Question Card ── */
 .q-card {
@@ -541,6 +549,83 @@ body::before {
 }
 .toast.show { transform: translateX(-50%) translateY(0); }
 
+/* ── Blessing modal (ก่อนไปเมนู) ── */
+.blessing-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(58, 46, 26, 0.85);
+  z-index: 2000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.35s, visibility 0.35s;
+}
+.blessing-overlay.open {
+  opacity: 1;
+  visibility: visible;
+}
+.blessing-card {
+  background: #FFF;
+  border-radius: 20px;
+  max-width: 480px;
+  width: 100%;
+  max-height: 90vh;
+  overflow-y: auto;
+  box-shadow: 0 12px 48px rgba(0,0,0,0.25);
+  padding: 2rem 1.75rem;
+  text-align: center;
+  transform: scale(0.95);
+  transition: transform 0.35s;
+}
+.blessing-overlay.open .blessing-card { transform: scale(1); }
+.blessing-title {
+  font-family: 'Noto Serif Thai', serif;
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--maroon);
+  margin-bottom: 1rem;
+}
+.blessing-pali {
+  font-size: 0.95rem;
+  line-height: 1.9;
+  color: var(--text-main);
+  margin-bottom: 1rem;
+  white-space: pre-line;
+}
+.blessing-thai {
+  font-size: 0.9rem;
+  line-height: 1.8;
+  color: var(--text-muted);
+  margin-bottom: 0.8rem;
+  white-space: pre-line;
+}
+.blessing-ref {
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  opacity: 0.85;
+  margin-bottom: 1.5rem;
+}
+.blessing-btn {
+  display: inline-block;
+  background: linear-gradient(135deg, var(--maroon-deep), var(--maroon));
+  color: #FFF;
+  font-weight: 700;
+  padding: 0.85rem 2rem;
+  border-radius: 12px;
+  text-decoration: none;
+  border: none;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+.blessing-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(107, 29, 29, 0.35);
+}
+
 /* ── Responsive ── */
 @media (max-width: 500px) {
   .container { padding: 1rem; }
@@ -626,6 +711,21 @@ body::before {
 
 <div class="toast" id="toast"></div>
 
+<!-- โมดัลคาถาก่อนไปหน้าเมนู -->
+<div class="blessing-overlay" id="blessing-modal" role="dialog" aria-modal="true" aria-label="คาถาอโรคยาปรมาลาภา">
+  <div class="blessing-card">
+    <div class="blessing-title">อโรคยาปรมาลาภา</div>
+    <div class="blessing-pali">อาโรคฺยํ ปรมา ลาภา, สนฺตุฏฺฐิ ปรมํ ธนํ;
+วิสฺสาสา ปรมา ญาติ, นิพฺพานํ ปรมํ สุขํฯ</div>
+    <div class="blessing-thai">ความไม่มีโรคเป็นลาภอันประเสริฐ
+ความสันโดษ เป็นทรัพย์อย่างยิ่ง
+ความคุ้นเคยกันเป็นญาติอย่างแท้จริง
+พระนิพพานเป็นสุขอย่างยอดเยี่ยม.</div>
+    <div class="blessing-ref">(นรทักขทีปนี ๒๕๒, ธรรมนีติ ๓๕๘, ธัมมปท สุขวัคค์)</div>
+    <button type="button" class="blessing-btn" id="blessing-go-menu">ไปหน้าเมนู</button>
+  </div>
+</div>
+
 <script>
 // ══════════════════════════════════════════
 // ⚠️ ใส่ URL ของ Google Apps Script ที่นี่
@@ -700,7 +800,16 @@ let userAge = "";
 // ── Load leaderboard on start ──
 window.addEventListener('DOMContentLoaded', () => {
   loadLeaderboard('lbPreviewBody');
+  const blessingModal = document.getElementById('blessing-modal');
+  const goMenuBtn = document.getElementById('blessing-go-menu');
+  if (goMenuBtn) goMenuBtn.addEventListener('click', () => { window.location.href = 'menu.html'; });
+  if (blessingModal) blessingModal.addEventListener('click', (e) => { if (e.target === blessingModal) blessingModal.classList.remove('open'); });
 });
+
+function openBlessingModal() {
+  const el = document.getElementById('blessing-modal');
+  if (el) el.classList.add('open');
+}
 
 function loadLeaderboard(containerId) {
   if (APPS_SCRIPT_URL === "YOUR_APPS_SCRIPT_URL_HERE") {
@@ -890,6 +999,7 @@ function showResult() {
 
     <div class="actions">
       <button class="btn btn-primary" onclick="retryQuiz()">🔄 ทำใหม่อีกครั้ง</button>
+      <button class="btn btn-secondary" onclick="openBlessingModal()">📋 กลับไปหน้าเมนู</button>
     </div>
   `;
 
