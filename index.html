@@ -1,0 +1,2105 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>สุขภาพดี สมณะมั่นคง — คู่มือโรคติดเชื้อสำหรับพระภิกษุและสามเณร</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Thai:wght@300;400;500;600;700;800;900&family=Noto+Serif+Thai:wght@400;600;700;900&family=Sarabun:wght@300;400;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --saffron: #E8920B;
+  --saffron-light: #F5B731;
+  --saffron-glow: #FDE7A9;
+  --maroon: #6B1D1D;
+  --maroon-deep: #4A1010;
+  --cream: #FFF8EC;
+  --cream-warm: #FFF3DB;
+  --brown: #5C3A1E;
+  --brown-light: #8B6914;
+  --gold: #C9A84C;
+  --gold-bright: #D4AF37;
+  --green-herb: #4A7C59;
+  --green-light: #6BA368;
+  --red-alert: #C0392B;
+  --red-soft: #E74C3C;
+  --blue-calm: #2C6E8A;
+  --blue-light: #3498DB;
+  --orange-warm: #D35400;
+  --purple-soft: #7D3C98;
+  --bg-body: #FAF4E8;
+  --text-main: #3B2E1A;
+  --text-muted: #7A6B55;
+  --shadow-warm: rgba(107, 29, 29, 0.08);
+  --shadow-gold: rgba(201, 168, 76, 0.15);
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'Sarabun', 'Noto Sans Thai', sans-serif;
+  background: var(--bg-body);
+  color: var(--text-main);
+  line-height: 1.8;
+  font-size: 17px;
+  overflow-x: hidden;
+}
+
+/* ── Texture overlay ── */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background: url("data:image/svg+xml,%3Csvg width='60' height='60' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M30 0L60 30L30 60L0 30z' fill='none' stroke='%23C9A84C' stroke-width='0.3' opacity='0.06'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ── Scrollbar ── */
+::-webkit-scrollbar { width: 8px; }
+::-webkit-scrollbar-track { background: var(--cream); }
+::-webkit-scrollbar-thumb { background: var(--saffron); border-radius: 4px; }
+
+/* ── Hero (landing) ── */
+.hero {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 2rem;
+  background-color: var(--maroon-deep);
+  background-image: url('images/watwa.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  overflow: hidden;
+}
+
+.hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(170deg, rgba(74, 16, 16, 0.72) 0%, rgba(107, 29, 29, 0.6) 40%, rgba(139, 58, 29, 0.5) 70%, rgba(232, 146, 11, 0.4) 100%);
+  animation: none;
+}
+
+@keyframes floatBg {
+  0% { transform: translateY(0); }
+  100% { transform: translateY(-200px); }
+}
+
+.hero-dhamma {
+  font-size: clamp(1rem, 2vw, 1.3rem);
+  color: var(--saffron-glow);
+  font-family: 'Noto Serif Thai', serif;
+  opacity: 0.85;
+  margin-bottom: 1rem;
+  position: relative;
+  z-index: 1;
+  animation: fadeUp 1s ease-out 0.2s both;
+}
+
+.hero-title {
+  font-family: 'Noto Serif Thai', serif;
+  font-size: clamp(2.2rem, 5.5vw, 4rem);
+  font-weight: 900;
+  color: #FFF;
+  line-height: 1.3;
+  position: relative;
+  z-index: 1;
+  animation: fadeUp 1s ease-out 0.4s both;
+  text-shadow: 0 4px 20px rgba(0,0,0,0.3);
+}
+
+.hero-title span {
+  display: block;
+  color: var(--saffron-light);
+}
+
+.hero-subtitle {
+  font-size: clamp(1rem, 2.2vw, 1.25rem);
+  color: var(--saffron-glow);
+  margin-top: 1.2rem;
+  max-width: 600px;
+  position: relative;
+  z-index: 1;
+  animation: fadeUp 1s ease-out 0.6s both;
+  font-weight: 300;
+}
+
+.hero-lotus {
+  font-size: 3rem;
+  position: relative;
+  z-index: 1;
+  margin-top: 2rem;
+  animation: fadeUp 1s ease-out 0.8s both;
+  opacity: 0.7;
+}
+
+.hero-scroll {
+  position: absolute;
+  bottom: 2rem;
+  z-index: 1;
+  animation: bounce 2s ease-in-out infinite;
+  color: var(--saffron-glow);
+  font-size: 0.85rem;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+@keyframes bounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(8px); }
+}
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ── Navigation ── */
+.nav-sticky {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: rgba(74, 16, 16, 0.95);
+  backdrop-filter: blur(12px);
+  border-bottom: 2px solid var(--gold);
+  padding: 0;
+}
+
+.nav-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  gap: 0;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+.nav-inner::-webkit-scrollbar { display: none; }
+
+.nav-link {
+  flex-shrink: 0;
+  padding: 1rem 1.2rem;
+  color: var(--saffron-glow);
+  text-decoration: none;
+  font-size: 0.9rem;
+  font-weight: 600;
+  transition: all 0.3s;
+  border-bottom: 3px solid transparent;
+  white-space: nowrap;
+}
+
+.nav-link:hover, .nav-link.active {
+  background: rgba(232, 146, 11, 0.15);
+  border-bottom-color: var(--saffron);
+  color: #FFF;
+}
+
+.nav-logo {
+  flex-shrink: 0;
+  padding: 0.8rem 1.2rem;
+  font-family: 'Noto Serif Thai', serif;
+  font-weight: 700;
+  color: var(--saffron-light);
+  font-size: 1.1rem;
+  text-decoration: none;
+}
+.nav-logo:hover { color: #FFF; }
+
+/* Hamburger — โชว์เฉพาะมือถือ */
+/* เมนูหลัก — แสดงบนแถบเสมอ ลิงก์ไป menu.html */
+.nav-main-link {
+  flex-shrink: 0;
+  padding: 0.8rem 1rem;
+  color: var(--saffron-glow);
+  text-decoration: none;
+  font-size: 0.9rem;
+  font-weight: 600;
+  white-space: nowrap;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(201, 168, 76, 0.4);
+  transition: background 0.2s, color 0.2s;
+}
+.nav-main-link:hover { background: rgba(232, 146, 11, 0.25); color: #FFF; }
+
+.nav-toggle {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+  width: 44px;
+  height: 44px;
+  padding: 10px;
+  margin-left: auto;
+  margin-right: 0.5rem;
+  background: rgba(232, 146, 11, 0.2);
+  border: 2px solid var(--saffron);
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+.nav-toggle:hover { background: rgba(232, 146, 11, 0.35); }
+.nav-toggle span {
+  display: block;
+  height: 2px;
+  background: var(--saffron-glow);
+  border-radius: 1px;
+  transition: transform 0.3s, opacity 0.3s;
+}
+.nav-toggle span:nth-child(1) { width: 20px; margin-left: 2px; }
+.nav-toggle span:nth-child(2) { width: 16px; margin-left: 6px; }
+.nav-toggle span:nth-child(3) { width: 20px; margin-left: 2px; }
+.nav-open .nav-toggle span:nth-child(1) {
+  transform: translateY(7px) rotate(45deg);
+}
+.nav-open .nav-toggle span:nth-child(2) {
+  opacity: 0;
+}
+.nav-open .nav-toggle span:nth-child(3) {
+  transform: translateY(-7px) rotate(-45deg);
+}
+
+.nav-menu {
+  display: flex;
+  align-items: center;
+  gap: 0;
+  flex: 1;
+}
+
+/* ── Section Layout ── */
+.section {
+  position: relative;
+  z-index: 1;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 4rem 1.5rem;
+}
+
+/* พื้นหลังแต่ละตอน (watmoolee1–7) */
+.section-bg-1 { background-image: url('images/watmoolee1.jpg'); background-size: cover; background-position: center; background-repeat: no-repeat; }
+.section-bg-2 { background-image: url('images/watmoolee2.jpg'); background-size: cover; background-position: center; background-repeat: no-repeat; }
+.section-bg-3 { background-image: url('images/watmoolee3.jpg'); background-size: cover; background-position: center; background-repeat: no-repeat; }
+.section-bg-4 { background-image: url('images/watmoolee4.jpg'); background-size: cover; background-position: center; background-repeat: no-repeat; }
+.section-bg-5 { background-image: url('images/watmoolee5.jpg'); background-size: cover; background-position: center; background-repeat: no-repeat; }
+.section-bg-6 { background-image: url('images/watmoolee6.jpg'); background-size: cover; background-position: center; background-repeat: no-repeat; }
+.section-bg-7 { background-image: url('images/watmoolee7.jpg'); background-size: cover; background-position: center; background-repeat: no-repeat; }
+.section-bg-kid { background-image: url('images/watmoolee_kid2.jpg'); background-size: cover; background-position: center; background-repeat: no-repeat; }
+.section-bg-1::before,
+.section-bg-2::before,
+.section-bg-3::before,
+.section-bg-4::before,
+.section-bg-5::before,
+.section-bg-6::before,
+.section-bg-7::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(250, 244, 232, 0.88);
+  z-index: 0;
+  pointer-events: none;
+}
+.section-bg-kid::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(255, 250, 240, 0.42) 0%, rgba(255, 248, 238, 0.38) 100%);
+  z-index: 0;
+  pointer-events: none;
+}
+.section-bg-1 > *,
+.section-bg-2 > *,
+.section-bg-3 > *,
+.section-bg-4 > *,
+.section-bg-5 > *,
+.section-bg-6 > *,
+.section-bg-7 > *,
+.section-bg-kid > * { position: relative; z-index: 1; }
+
+.section-header {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.section-icon {
+  font-size: 2.5rem;
+  margin-bottom: 0.8rem;
+}
+
+.section-number {
+  display: inline-block;
+  background: var(--maroon);
+  color: var(--saffron-glow);
+  font-family: 'Noto Serif Thai', serif;
+  font-size: 0.8rem;
+  font-weight: 700;
+  padding: 0.3rem 1rem;
+  border-radius: 20px;
+  margin-bottom: 0.8rem;
+  letter-spacing: 1px;
+}
+
+.section-title {
+  font-family: 'Noto Serif Thai', serif;
+  font-size: clamp(1.6rem, 3.5vw, 2.2rem);
+  font-weight: 900;
+  color: var(--maroon-deep);
+  line-height: 1.4;
+}
+
+.section-subtitle {
+  color: var(--text-muted);
+  font-size: 1.05rem;
+  margin-top: 0.5rem;
+  font-weight: 300;
+}
+
+/* ── Divider ── */
+.divider {
+  text-align: center;
+  padding: 1.5rem 0;
+  color: var(--gold);
+  font-size: 1.5rem;
+  opacity: 0.5;
+  letter-spacing: 1rem;
+}
+
+.section-divider {
+  border: none;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--gold), transparent);
+  max-width: 400px;
+  margin: 0 auto;
+}
+
+/* ── Disease Cards ── */
+.disease-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 480px), 1fr));
+  gap: 2rem;
+}
+
+.disease-card {
+  background: #FFF;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 4px 24px var(--shadow-warm), 0 1px 4px rgba(0,0,0,0.05);
+  transition: transform 0.3s, box-shadow 0.3s;
+  position: relative;
+}
+
+.disease-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 40px var(--shadow-warm), 0 2px 8px rgba(0,0,0,0.08);
+}
+
+.card-banner {
+  padding: 1.5rem 1.8rem;
+  color: #FFF;
+  position: relative;
+  overflow: hidden;
+}
+
+.card-banner::after {
+  content: '';
+  position: absolute;
+  bottom: -1px;
+  left: 0;
+  right: 0;
+  height: 20px;
+  background: #FFF;
+  clip-path: ellipse(55% 100% at 50% 100%);
+}
+
+.card-banner.measles { background: linear-gradient(135deg, #C0392B, #E74C3C); }
+.card-banner.rubella { background: linear-gradient(135deg, #7D3C98, #9B59B6); }
+.card-banner.chickenpox { background: linear-gradient(135deg, #D35400, #E67E22); }
+.card-banner.dengue { background: linear-gradient(135deg, #2C6E8A, #3498DB); }
+
+.card-emoji {
+  font-size: 2rem;
+  margin-bottom: 0.5rem;
+}
+
+.card-name-th {
+  font-family: 'Noto Serif Thai', serif;
+  font-size: 1.5rem;
+  font-weight: 900;
+}
+
+.card-name-en {
+  font-size: 0.85rem;
+  opacity: 0.8;
+  font-weight: 300;
+}
+
+.card-body {
+  padding: 1.5rem 1.8rem 1.8rem;
+}
+
+.symptom-group {
+  margin-bottom: 1.2rem;
+}
+
+.symptom-label {
+  font-weight: 700;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: var(--text-muted);
+  margin-bottom: 0.4rem;
+}
+
+.symptom-text {
+  font-size: 0.98rem;
+  line-height: 1.7;
+  color: var(--text-main);
+}
+
+.symptom-highlight {
+  display: inline-block;
+  background: var(--cream-warm);
+  padding: 0.1rem 0.5rem;
+  border-radius: 4px;
+  font-weight: 600;
+  color: var(--maroon);
+}
+
+.card-tag {
+  display: inline-block;
+  padding: 0.25rem 0.7rem;
+  border-radius: 12px;
+  font-size: 0.78rem;
+  font-weight: 600;
+  margin-right: 0.3rem;
+  margin-top: 0.3rem;
+}
+
+.tag-fever { background: #FDEDEC; color: #C0392B; }
+.tag-rash { background: #FEF5E7; color: #D35400; }
+.tag-danger { background: #F9EBEA; color: #922B21; }
+.tag-contagious { background: #EBF5FB; color: #2C6E8A; }
+.tag-vaccine { background: #E8F8F5; color: #1E8449; }
+
+/* ── Comparison Table ── */
+.compare-wrapper {
+  overflow-x: auto;
+  margin: 2rem 0;
+  border-radius: 12px;
+  box-shadow: 0 4px 24px var(--shadow-warm);
+}
+
+.compare-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: #FFF;
+  min-width: 700px;
+}
+
+.compare-table th {
+  font-family: 'Noto Serif Thai', serif;
+  padding: 1rem;
+  font-size: 0.95rem;
+  color: #FFF;
+  text-align: center;
+}
+
+.compare-table th:first-child {
+  background: var(--maroon);
+  text-align: left;
+}
+
+.compare-table th.measles-h { background: #C0392B; }
+.compare-table th.rubella-h { background: #7D3C98; }
+.compare-table th.chickenpox-h { background: #D35400; }
+.compare-table th.dengue-h { background: #2C6E8A; }
+
+.compare-table td {
+  padding: 0.8rem 1rem;
+  border-bottom: 1px solid #F0E8D8;
+  font-size: 0.9rem;
+  vertical-align: top;
+}
+
+.compare-table tr:last-child td { border-bottom: none; }
+
+.compare-table td:first-child {
+  font-weight: 700;
+  color: var(--maroon);
+  white-space: nowrap;
+  background: var(--cream);
+}
+
+.compare-table tr:hover td {
+  background: var(--cream-warm);
+}
+
+.compare-table tr:hover td:first-child {
+  background: var(--saffron-glow);
+}
+
+/* ── Prevention Section ── */
+.prevent-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 1fr));
+  gap: 1.5rem;
+}
+
+.prevent-card {
+  background: #FFF;
+  border-radius: 12px;
+  padding: 1.8rem;
+  box-shadow: 0 2px 16px var(--shadow-warm);
+  border-left: 5px solid var(--green-herb);
+  transition: transform 0.3s;
+}
+
+.prevent-card:hover {
+  transform: translateY(-3px);
+}
+
+.prevent-letter {
+  display: inline-flex;
+  width: 44px;
+  height: 44px;
+  align-items: center;
+  justify-content: center;
+  background: var(--green-herb);
+  color: #FFF;
+  font-family: 'Noto Serif Thai', serif;
+  font-size: 1.2rem;
+  font-weight: 900;
+  border-radius: 10px;
+  margin-bottom: 0.8rem;
+}
+
+.prevent-card:last-child .prevent-letter {
+  background: var(--saffron);
+}
+
+.prevent-card:last-child {
+  border-left-color: var(--saffron);
+}
+
+.prevent-title {
+  font-family: 'Noto Serif Thai', serif;
+  font-weight: 700;
+  font-size: 1.15rem;
+  color: var(--brown);
+  margin-bottom: 0.4rem;
+}
+
+.prevent-desc {
+  font-size: 0.95rem;
+  color: var(--text-muted);
+  line-height: 1.7;
+}
+
+/* ── Medicine Warning ── */
+.med-section {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr));
+  gap: 2rem;
+  margin-top: 2rem;
+}
+
+.med-safe {
+  background: linear-gradient(135deg, #E8F8F5, #D5F5E3);
+  border: 2px solid #27AE60;
+  border-radius: 16px;
+  padding: 2rem;
+  text-align: center;
+}
+
+.med-danger {
+  background: linear-gradient(135deg, #FDEDEC, #FADBD8);
+  border: 2px solid #E74C3C;
+  border-radius: 16px;
+  padding: 2rem;
+  text-align: center;
+}
+
+.med-icon {
+  font-size: 3rem;
+  margin-bottom: 0.8rem;
+}
+
+.med-title {
+  font-family: 'Noto Serif Thai', serif;
+  font-size: 1.3rem;
+  font-weight: 900;
+  margin-bottom: 0.5rem;
+}
+
+.med-safe .med-title { color: #1E8449; }
+.med-danger .med-title { color: #C0392B; }
+
+.med-drug {
+  font-size: 1.1rem;
+  font-weight: 700;
+  margin: 0.5rem 0;
+}
+
+.med-reason {
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  margin-top: 0.8rem;
+  line-height: 1.6;
+}
+
+/* ── Warning Signs ── */
+.warning-box {
+  background: linear-gradient(135deg, #FDF2F2, #FDE8E8);
+  border: 2px solid var(--red-alert);
+  border-radius: 16px;
+  padding: 2.5rem;
+  margin-top: 2rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.warning-box::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: repeating-linear-gradient(90deg, var(--red-alert) 0, var(--red-alert) 20px, transparent 20px, transparent 30px);
+}
+
+.warning-header {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.warning-flash {
+  font-size: 2.5rem;
+  animation: flash 1.5s ease-in-out infinite;
+}
+
+@keyframes flash {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.4; }
+}
+
+.warning-title {
+  font-family: 'Noto Serif Thai', serif;
+  font-size: 1.5rem;
+  font-weight: 900;
+  color: var(--red-alert);
+}
+
+.warning-note {
+  font-size: 0.9rem;
+  color: var(--red-alert);
+  opacity: 0.8;
+}
+
+.warning-list {
+  list-style: none;
+  display: grid;
+  gap: 1rem;
+}
+
+.warning-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+  background: #FFF;
+  padding: 1rem 1.2rem;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(192, 57, 43, 0.08);
+  font-size: 0.98rem;
+}
+
+.warning-icon-sm {
+  flex-shrink: 0;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #FDEDEC;
+  border-radius: 8px;
+  font-size: 1rem;
+}
+
+/* ── Vaccine Section ── */
+.vaccine-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 1fr));
+  gap: 2rem;
+  margin-top: 2rem;
+}
+
+.vaccine-card {
+  background: #FFF;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 4px 24px var(--shadow-gold);
+  transition: transform 0.3s;
+}
+
+.vaccine-card:hover {
+  transform: translateY(-4px);
+}
+
+.vaccine-header {
+  padding: 1.5rem;
+  color: #FFF;
+  text-align: center;
+}
+
+.vaccine-header.mmr { background: linear-gradient(135deg, #27AE60, #2ECC71); }
+.vaccine-header.qdenga { background: linear-gradient(135deg, #2C6E8A, #3498DB); }
+.vaccine-header.varicella { background: linear-gradient(135deg, #D35400, #E67E22); }
+
+.vaccine-name {
+  font-family: 'Noto Serif Thai', serif;
+  font-size: 1.4rem;
+  font-weight: 900;
+}
+
+.vaccine-target {
+  font-size: 0.85rem;
+  opacity: 0.85;
+  margin-top: 0.3rem;
+}
+
+.vaccine-body {
+  padding: 1.5rem;
+}
+
+.vaccine-stat {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  padding: 0.6rem 0;
+  border-bottom: 1px solid #F0E8D8;
+  font-size: 0.95rem;
+}
+
+.vaccine-stat:last-child { border-bottom: none; }
+
+.vaccine-stat-icon {
+  flex-shrink: 0;
+  width: 28px;
+  text-align: center;
+}
+
+/* ── Extra Content: Monk Care ── */
+.monk-tips {
+  background: linear-gradient(135deg, var(--cream-warm), #FFF8EC);
+  border: 2px solid var(--gold);
+  border-radius: 16px;
+  padding: 2.5rem;
+  margin-top: 2rem;
+}
+
+.monk-tips-title {
+  font-family: 'Noto Serif Thai', serif;
+  font-size: 1.4rem;
+  font-weight: 900;
+  color: var(--brown);
+  margin-bottom: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+}
+
+.monk-tip-item {
+  padding: 0.8rem 0;
+  border-bottom: 1px solid rgba(201, 168, 76, 0.2);
+  display: flex;
+  gap: 0.8rem;
+  align-items: flex-start;
+}
+
+.monk-tip-item:last-child { border-bottom: none; }
+
+.tip-bullet {
+  flex-shrink: 0;
+  width: 24px;
+  height: 24px;
+  background: var(--saffron);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #FFF;
+  font-size: 0.7rem;
+  font-weight: 700;
+  margin-top: 2px;
+}
+
+/* ── FAQ Section ── */
+.faq-item {
+  background: rgba(255, 255, 255, 0.30);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-radius: 12px;
+  margin-bottom: 1rem;
+  box-shadow: 0 2px 12px rgba(107, 29, 29, 0.08);
+  overflow: hidden;
+}
+
+.faq-q {
+  padding: 1.2rem 1.5rem;
+  font-family: 'Noto Serif Thai', serif;
+  font-weight: 700;
+  font-size: 1.05rem;
+  color: var(--maroon-deep);
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: background 0.3s;
+}
+
+.faq-q:hover { background: rgba(255, 248, 236, 0.6); }
+
+.faq-arrow {
+  transition: transform 0.3s;
+  font-size: 1.2rem;
+  color: var(--saffron);
+}
+
+.faq-item.open .faq-arrow {
+  transform: rotate(180deg);
+}
+
+.faq-a {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.4s ease, padding 0.3s;
+}
+
+.faq-item.open .faq-a {
+  max-height: 500px;
+  padding: 0 1.5rem 1.2rem;
+}
+
+.faq-a-text {
+  font-size: 0.95rem;
+  line-height: 1.8;
+  color: var(--text-main);
+}
+
+/* บนพื้นหลัง watmoolee_kid2: ตัวหนังสือเข้ม ชัด ไม่มีเงา */
+#faq .faq-q {
+  color: #0d0805;
+  font-weight: 800;
+  text-shadow: none;
+}
+#faq .faq-a-text {
+  color: #1a120c;
+  font-weight: 600;
+  text-shadow: none;
+}
+#faq .section-title,
+#faq .section-subtitle {
+  color: #0d0805;
+  text-shadow: none;
+}
+
+/* ── ปุ่มลิงก์แบบทดสอบ (quiz) ── */
+.section-quiz-cta {
+  background: linear-gradient(165deg, var(--cream-warm) 0%, var(--cream) 100%);
+  border-top: 2px solid var(--gold);
+  border-bottom: 2px solid var(--gold);
+}
+.quiz-cta-wrap {
+  text-align: center;
+  margin-top: 1rem;
+}
+.quiz-cta-btn {
+  display: inline-block;
+  padding: 1rem 2rem;
+  background: linear-gradient(135deg, var(--maroon), #8B3A1D);
+  color: var(--saffron-glow);
+  text-decoration: none;
+  font-weight: 700;
+  font-size: 1.15rem;
+  border-radius: 12px;
+  border: 2px solid var(--gold);
+  box-shadow: 0 4px 16px var(--shadow-warm);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+.quiz-cta-btn:hover { color: #FFF; transform: translateY(-2px); box-shadow: 0 6px 20px var(--shadow-warm); }
+
+/* ── Footer ── */
+.footer {
+  background: var(--maroon-deep);
+  color: var(--saffron-glow);
+  text-align: center;
+  padding: 3rem 1.5rem;
+  position: relative;
+  z-index: 1;
+}
+
+.footer-lotus {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+  opacity: 0.6;
+}
+
+.footer-text {
+  font-size: 0.9rem;
+  opacity: 0.7;
+  max-width: 500px;
+  margin: 0 auto;
+  line-height: 1.7;
+}
+
+.footer-credit {
+  margin-top: 1.5rem;
+  font-size: 0.78rem;
+  opacity: 0.4;
+}
+
+.footer-bottom {
+  margin-top: 2rem;
+  padding-top: 1.25rem;
+  border-top: 1px solid rgba(201, 168, 76, 0.25);
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  font-size: 0.8rem;
+  opacity: 0.85;
+}
+.footer-bottom a {
+  color: var(--saffron-glow);
+  text-decoration: none;
+}
+.footer-bottom a:hover { text-decoration: underline; color: #FFF; }
+.footer-bottom-right { text-align: right; }
+
+/* ── Responsive ── */
+@media (max-width: 768px) {
+  .section { padding: 3rem 1rem; }
+  .card-body { padding: 1.2rem; }
+  .card-banner { padding: 1.2rem; }
+  .warning-box { padding: 1.5rem; }
+  .monk-tips { padding: 1.5rem; }
+  .nav-link { padding: 0.8rem 1rem; font-size: 0.82rem; }
+  .footer-bottom { flex-direction: column; text-align: center; }
+  .footer-bottom-right { text-align: center; }
+
+  /* Mobile: แสดงปุ่มแฮมเบอร์เกอร์ */
+  .nav-toggle { display: flex; }
+  .nav-inner { flex-wrap: wrap; }
+  .nav-menu {
+    flex-basis: 100%;
+    flex-direction: column;
+    max-height: 0;
+    overflow: hidden;
+    opacity: 0;
+    transition: max-height 0.35s ease, opacity 0.25s ease;
+    order: 10;
+    background: rgba(74, 16, 16, 0.98);
+    border-top: 1px solid var(--gold);
+  }
+  .nav-open .nav-menu {
+    max-height: 85vh;
+    overflow-y: auto;
+    opacity: 1;
+  }
+  .nav-menu .nav-link {
+    width: 100%;
+    text-align: left;
+    padding: 1rem 1.2rem;
+    border-bottom: 1px solid rgba(201, 168, 76, 0.2);
+  }
+}
+
+/* ── Animations ── */
+.fade-in {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.fade-in.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+</style>
+</head>
+<body>
+
+<!-- ═══════════ HERO ═══════════ -->
+<section class="hero">
+  <div class="hero-dhamma">☸ อโรคยา ปรมา ลาภา ☸</div>
+  <h1 class="hero-title">
+    สุขภาพดี สมณะมั่นคง
+    <span>คู่มือโรคติดเชื้อ ๔ โรค</span>
+  </h1>
+  <p class="hero-subtitle">
+    ความรู้เรื่องหัด หัดเยอรมัน อีสุกอีใส และไข้เลือดออก<br>
+    สำหรับพระภิกษุและสามเณร — เพื่อดูแลสุขภาพกายให้มั่นคงดุจดั่งธรรม
+  </p>
+  <div class="hero-lotus">🪷</div>
+  <a href="#content-start" class="hero-scroll">▼ เลื่อนลงเพื่ออ่าน</a>
+  <a href="menu.html" class="hero-scroll" style="bottom: 4.5rem;">📋 เลือกจากเมนู</a>
+</section>
+
+<!-- ═══════════ NAV ─────────────────────────────────────────
+  ลิงก์ไป menu.html เป็น relative — เวลา deploy ต้องให้ index.html กับ menu.html อยู่โฟลเดอร์เดียวกัน
+  ═══════════════════════════════════════════════════════ -->
+<nav class="nav-sticky" id="main-nav">
+  <div class="nav-inner">
+    <a href="menu.html" class="nav-logo">☸ สุขภาพสงฆ์</a>
+    <a href="menu.html" class="nav-main-link">📋 เมนูหลัก</a>
+    <button type="button" class="nav-toggle" id="nav-toggle" aria-label="เปิดเมนู">
+      <span></span><span></span><span></span>
+    </button>
+    <div class="nav-menu">
+      <a href="#diseases" class="nav-link">ไข้ออกผื่น</a>
+      <a href="#compare" class="nav-link">ตาราง</a>
+      <a href="#prevent" class="nav-link">คาถาป้องกัน</a>
+      <a href="#medicine" class="nav-link">ยาอันตราย</a>
+      <a href="#warning" class="nav-link">สัญญาณวิกฤต</a>
+      <a href="#vaccine" class="nav-link">วัคซีน</a>
+      <a href="#outbreak" class="nav-link">เมื่อระบาด</a>
+      <a href="#monkcare" class="nav-link">ข้อปฏิบัติ</a>
+      <a href="#faq" class="nav-link">คำถาม</a>
+    </div>
+  </div>
+</nav>
+
+<div id="content-start"></div>
+
+<!-- ═══════════ ๑. โรค ๔ ชนิด ═══════════ -->
+<section class="section section-bg-1 fade-in" id="diseases">
+  <div class="section-header">
+    <div class="section-number">บทที่ ๑</div>
+    <h2 class="section-title">๔ พี่น้องส่องกระจก</h2>
+    <p class="section-subtitle">แยกโรคผื่นออกผิวหนังให้เป็น — อาการต่างกันอย่างไร</p>
+  </div>
+
+  <div class="disease-grid">
+
+    <!-- หัดแท้ -->
+    <div class="disease-card">
+      <div class="card-banner measles">
+        <div class="card-emoji">🔴</div>
+        <div class="card-name-th">หัดแท้ (Measles)</div>
+        <div class="card-name-en">เชื้อไวรัส Measles Virus — แพร่ทางอากาศ</div>
+      </div>
+      <div class="card-body">
+        <div class="symptom-group">
+          <div class="symptom-label">🌡️ ไข้</div>
+          <div class="symptom-text"><span class="symptom-highlight">ไข้สูงลอย</span> มักเกิน 39°C ก่อนมีผื่น 2–4 วัน</div>
+        </div>
+        <div class="symptom-group">
+          <div class="symptom-label">🔍 อาการเด่น — 3C</div>
+          <div class="symptom-text"><span class="symptom-highlight">Cough</span> ไอ, <span class="symptom-highlight">Coryza</span> น้ำมูกไหล, <span class="symptom-highlight">Conjunctivitis</span> ตาแดง ร่วมกันทั้ง 3 อาการ</div>
+        </div>
+        <div class="symptom-group">
+          <div class="symptom-label">🩹 ลักษณะผื่น</div>
+          <div class="symptom-text">ผื่นแดงราบ (maculopapular) เริ่มจาก <span class="symptom-highlight">ไรผมและหลังหู</span> แล้วลามลงไปถึงเท้า ใช้เวลาประมาณ 3 วัน</div>
+        </div>
+        <div class="symptom-group">
+          <div class="symptom-label">⚡ ระยะฟักตัว & การแพร่เชื้อ</div>
+          <div class="symptom-text">ฟักตัว 10–14 วัน แพร่เชื้อได้ตั้งแต่ 4 วันก่อนจนถึง 4 วันหลังมีผื่น ติดต่อง่ายมากทางอากาศ</div>
+        </div>
+        <div class="symptom-group">
+          <div class="symptom-label">⚠️ ภาวะแทรกซ้อน</div>
+          <div class="symptom-text">ปอดบวม สมองอักเสบ ท้องเสียรุนแรง อาจถึงแก่ชีวิตในผู้ที่ภูมิคุ้มกันอ่อนแอ</div>
+        </div>
+        <div>
+          <span class="card-tag tag-fever">ไข้สูงลอย</span>
+          <span class="card-tag tag-rash">ผื่นแดงลามลง</span>
+          <span class="card-tag tag-contagious">ติดต่อทางอากาศ</span>
+          <span class="card-tag tag-vaccine">ป้องกันด้วย MMR</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- หัดเยอรมัน -->
+    <div class="disease-card">
+      <div class="card-banner rubella">
+        <div class="card-emoji">🟣</div>
+        <div class="card-name-th">หัดเยอรมัน (Rubella)</div>
+        <div class="card-name-en">เชื้อไวรัส Rubella Virus — แพร่ทางละอองฝอย</div>
+      </div>
+      <div class="card-body">
+        <div class="symptom-group">
+          <div class="symptom-label">🌡️ ไข้</div>
+          <div class="symptom-text"><span class="symptom-highlight">ไข้ต่ำ</span> ไม่รุนแรง อาการโดยรวมเบากว่าหัดแท้มาก</div>
+        </div>
+        <div class="symptom-group">
+          <div class="symptom-label">🔍 อาการเด่น</div>
+          <div class="symptom-text"><span class="symptom-highlight">ต่อมน้ำเหลืองบวม</span> โดยเฉพาะบริเวณหลังหูและท้ายทอย เป็นลักษณะเด่นที่ช่วยแยกจากหัดแท้</div>
+        </div>
+        <div class="symptom-group">
+          <div class="symptom-label">🩹 ลักษณะผื่น</div>
+          <div class="symptom-text">ผื่นจางกว่าหัดแท้ เม็ดเล็กสีชมพู <span class="symptom-highlight">หายเร็วภายใน 3 วัน</span> จึงเรียกว่า "3-day measles"</div>
+        </div>
+        <div class="symptom-group">
+          <div class="symptom-label">⚡ ระยะฟักตัว & การแพร่เชื้อ</div>
+          <div class="symptom-text">ฟักตัว 14–21 วัน แพร่เชื้อได้ตั้งแต่ 7 วันก่อนจนถึง 7 วันหลังมีผื่น</div>
+        </div>
+        <div class="symptom-group">
+          <div class="symptom-label">⚠️ อันตรายสำคัญ</div>
+          <div class="symptom-text">อันตรายมากสำหรับ<span class="symptom-highlight">หญิงตั้งครรภ์</span> เชื้อผ่านรกได้ ทำให้ทารกพิการแต่กำเนิด (Congenital Rubella Syndrome) หูหนวก หัวใจผิดปกติ สมองเล็ก</div>
+        </div>
+        <div>
+          <span class="card-tag tag-fever">ไข้ต่ำ</span>
+          <span class="card-tag tag-rash">ผื่นจาง หาย 3 วัน</span>
+          <span class="card-tag tag-danger">อันตรายต่อทารก</span>
+          <span class="card-tag tag-vaccine">ป้องกันด้วย MMR</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- อีสุกอีใส -->
+    <div class="disease-card">
+      <div class="card-banner chickenpox">
+        <div class="card-emoji">🟠</div>
+        <div class="card-name-th">อีสุกอีใส (Chickenpox)</div>
+        <div class="card-name-en">เชื้อไวรัส Varicella-Zoster — แพร่ทางอากาศและสัมผัส</div>
+      </div>
+      <div class="card-body">
+        <div class="symptom-group">
+          <div class="symptom-label">🌡️ ไข้</div>
+          <div class="symptom-text"><span class="symptom-highlight">ไข้ต่ำถึงปานกลาง</span> มักเกิดร่วมกับผื่นพร้อมกัน</div>
+        </div>
+        <div class="symptom-group">
+          <div class="symptom-label">🔍 อาการเด่น</div>
+          <div class="symptom-text">ตุ่มน้ำใสเหมือน <span class="symptom-highlight">"หยดน้ำบนกลีบกุหลาบ"</span> คันมาก มักขึ้นที่ลำตัวและใบหน้าก่อน</div>
+        </div>
+        <div class="symptom-group">
+          <div class="symptom-label">🩹 ลักษณะผื่น</div>
+          <div class="symptom-text">มีผื่น<span class="symptom-highlight">หลายระยะในที่เดียวกัน</span> — ตุ่มแดง ตุ่มน้ำใส ตุ่มหนอง และสะเก็ด ปะปนกันทั่วตัว ขึ้นเป็นระลอก</div>
+        </div>
+        <div class="symptom-group">
+          <div class="symptom-label">⚡ ระยะฟักตัว & การแพร่เชื้อ</div>
+          <div class="symptom-text">ฟักตัว 14–16 วัน แพร่เชื้อได้ตั้งแต่ 1–2 วันก่อนมีผื่น จนกว่าตุ่มทุกตุ่มจะตกสะเก็ดหมด</div>
+        </div>
+        <div class="symptom-group">
+          <div class="symptom-label">⚠️ ภาวะแทรกซ้อน</div>
+          <div class="symptom-text">ผิวหนังติดเชื้อแบคทีเรียซ้ำ ปอดบวม สมองอักเสบ ผู้ใหญ่มีอาการรุนแรงกว่าเด็ก เชื้ออาจหลับในปมประสาทแล้วกลับมาเป็น <span class="symptom-highlight">งูสวัด</span> ในอนาคต</div>
+        </div>
+        <div>
+          <span class="card-tag tag-fever">ไข้ต่ำ-ปานกลาง</span>
+          <span class="card-tag tag-rash">ตุ่มน้ำใสหลายระยะ</span>
+          <span class="card-tag tag-contagious">ติดต่อง่ายมาก</span>
+          <span class="card-tag tag-vaccine">ป้องกันด้วย Varicella</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- ไข้เลือดออก -->
+    <div class="disease-card">
+      <div class="card-banner dengue">
+        <div class="card-emoji">🔵</div>
+        <div class="card-name-th">ไข้เลือดออก (Dengue)</div>
+        <div class="card-name-en">เชื้อไวรัส Dengue — ยุงลาย Aedes aegypti เป็นพาหะ</div>
+      </div>
+      <div class="card-body">
+        <div class="symptom-group">
+          <div class="symptom-label">🌡️ ไข้</div>
+          <div class="symptom-text"><span class="symptom-highlight">ไข้สูงปรี๊ด 39–40°C</span> หน้าแดง แต่มักไม่มีน้ำมูกหรือไอ ต่างจากหัดอย่างชัดเจน</div>
+        </div>
+        <div class="symptom-group">
+          <div class="symptom-label">🔍 อาการเด่น</div>
+          <div class="symptom-text"><span class="symptom-highlight">ปวดกระบอกตา</span> รุนแรง ปวดเมื่อยกล้ามเนื้อและกระดูก จนได้ชื่อว่า "Breakbone Fever" เบื่ออาหาร อ่อนเพลียมาก</div>
+        </div>
+        <div class="symptom-group">
+          <div class="symptom-label">🩹 ลักษณะผื่น</div>
+          <div class="symptom-text">ผื่นแดงจุดเล็ก ๆ (petechiae) <span class="symptom-highlight">กดแล้วไม่จาง</span> ทดสอบโดยรัดแขนแล้วนับจุดเลือดออก (Tourniquet test)</div>
+        </div>
+        <div class="symptom-group">
+          <div class="symptom-label">⚡ ระยะฟักตัว & ช่วงวิกฤต</div>
+          <div class="symptom-text">ฟักตัว 4–10 วัน <span class="symptom-highlight">ระวังช่วงไข้ลด (วันที่ 3–7)</span> เป็นระยะวิกฤตที่พลาสมารั่วออกนอกหลอดเลือด อาจช็อกได้</div>
+        </div>
+        <div class="symptom-group">
+          <div class="symptom-label">⚠️ ภาวะแทรกซ้อน</div>
+          <div class="symptom-text">ภาวะช็อกจากเลือดออก (Dengue Shock Syndrome — DSS) ตับวาย เลือดออกในอวัยวะภายใน ผู้ที่เป็นซ้ำมีความเสี่ยงรุนแรงมากขึ้น</div>
+        </div>
+        <div>
+          <span class="card-tag tag-fever">ไข้สูงลอย</span>
+          <span class="card-tag tag-rash">จุดเลือดออก</span>
+          <span class="card-tag tag-danger">ระวังระยะไข้ลด</span>
+          <span class="card-tag tag-contagious">ยุงลายเป็นพาหะ</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<div class="divider">◆ ◆ ◆</div>
+
+<!-- ═══════════ ตารางเปรียบเทียบ ═══════════ -->
+<section class="section section-bg-2 fade-in" id="compare">
+  <div class="section-header">
+    <div class="section-icon">📊</div>
+    <h2 class="section-title">ตารางเปรียบเทียบ ๔ โรค</h2>
+    <p class="section-subtitle">ดูข้อแตกต่างของแต่ละโรคในมุมมองเดียว</p>
+  </div>
+
+  <div class="compare-wrapper">
+    <table class="compare-table">
+      <thead>
+        <tr>
+          <th>ลักษณะ</th>
+          <th class="measles-h">🔴 หัดแท้</th>
+          <th class="rubella-h">🟣 หัดเยอรมัน</th>
+          <th class="chickenpox-h">🟠 อีสุกอีใส</th>
+          <th class="dengue-h">🔵 ไข้เลือดออก</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>สาเหตุ</td>
+          <td>Measles virus</td>
+          <td>Rubella virus</td>
+          <td>Varicella-Zoster</td>
+          <td>Dengue virus (ยุงลาย)</td>
+        </tr>
+        <tr>
+          <td>ระดับไข้</td>
+          <td>สูงลอย ≥39°C</td>
+          <td>ต่ำ</td>
+          <td>ต่ำ-ปานกลาง</td>
+          <td>สูงปรี๊ด 39–40°C</td>
+        </tr>
+        <tr>
+          <td>ลักษณะผื่น</td>
+          <td>ราบแดง ลามจากบนลงล่าง</td>
+          <td>จุดชมพูจาง หาย 3 วัน</td>
+          <td>ตุ่มน้ำใส หลายระยะ</td>
+          <td>จุดเลือดออก กดไม่จาง</td>
+        </tr>
+        <tr>
+          <td>ไอ/น้ำมูก</td>
+          <td>มี (3C)</td>
+          <td>อาจมีเล็กน้อย</td>
+          <td>ไม่เด่น</td>
+          <td>ไม่มี ❌</td>
+        </tr>
+        <tr>
+          <td>อาการเด่น</td>
+          <td>ตาแดง + ไอ</td>
+          <td>ต่อมน้ำเหลืองโต</td>
+          <td>คันมาก</td>
+          <td>ปวดกระบอกตา + ปวดกระดูก</td>
+        </tr>
+        <tr>
+          <td>ฟักตัว</td>
+          <td>10–14 วัน</td>
+          <td>14–21 วัน</td>
+          <td>14–16 วัน</td>
+          <td>4–10 วัน</td>
+        </tr>
+        <tr>
+          <td>การติดต่อ</td>
+          <td>ทางอากาศ</td>
+          <td>ละอองฝอย</td>
+          <td>อากาศ+สัมผัส</td>
+          <td>ยุงลายกัด</td>
+        </tr>
+        <tr>
+          <td>วัคซีน</td>
+          <td>MMR ✅</td>
+          <td>MMR ✅</td>
+          <td>Varicella ✅</td>
+          <td>Qdenga ✅</td>
+        </tr>
+        <tr>
+          <td>🔒 ระยะแยกตัว</td>
+          <td style="color:#C0392B;font-weight:600;">≥ 4 วันหลังผื่นขึ้น</td>
+          <td style="color:#7D3C98;font-weight:600;">7 วันหลังผื่นขึ้น</td>
+          <td style="color:#D35400;font-weight:600;">จนตุ่มสุดท้ายตกสะเก็ด (~5–7 วัน)</td>
+          <td style="color:#2C6E8A;font-weight:600;">ใช้มุ้งกันยุง ตลอดช่วงมีไข้</td>
+        </tr>
+        <tr>
+          <td>เกณฑ์จำ</td>
+          <td>"นับวัน" — ครบ 4 วัน</td>
+          <td>"แยกนานกว่าหัด" เพื่อปกป้องหญิงครรภ์</td>
+          <td>"ดูอาการ" — ตุ่มแห้งหมด</td>
+          <td>ไม่ติดคนสู่คน — กันยุงเป็นหลัก</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<hr class="section-divider">
+
+<!-- ═══════════ ๒. การป้องกันโรค (รวม ๕ป.๑ข. + แยกตัว + ฉีด-ห่าง-ปิด-เปิด) ═══════════ -->
+<section class="section section-bg-3 fade-in" id="prevent">
+  <div class="section-header">
+    <div class="section-number">บทที่ ๒</div>
+    <h2 class="section-title">การป้องกันโรค</h2>
+    <p class="section-subtitle">๕ ป. ๑ ข. ปราบยุงลาย / ระยะเวลาแยกตัว / คาถา "ฉีด-ห่าง-ปิด-เปิด"</p>
+  </div>
+
+  <!-- ─── หมวด ก: ๕ ป. ๑ ข. ─── -->
+  <div style="margin-bottom:3rem;">
+    <div style="display:inline-flex;align-items:center;gap:0.6rem;background:var(--green-herb);color:#FFF;padding:0.5rem 1.2rem;border-radius:20px;font-family:'Noto Serif Thai',serif;font-weight:700;font-size:1rem;margin-bottom:1.2rem;">
+      <span>🦟</span> ๕ ป. ๑ ข. — ปราบยุงลายสไตล์วัดป่า
+    </div>
+    <p style="color:var(--text-muted);font-size:0.92rem;margin-bottom:1.2rem;">มาตรการป้องกันไข้เลือดออกและโรคที่มียุงลายเป็นพาหะ</p>
+    <div class="prevent-grid">
+    <div class="prevent-card">
+      <div class="prevent-letter">ป</div>
+      <div class="prevent-title">ปิด</div>
+      <div class="prevent-desc">ปิดฝาภาชนะขังน้ำให้มิดชิด ไม่ว่าจะเป็นโอ่ง ถังน้ำ หรือตุ่มน้ำ ยุงลายวางไข่ได้แม้ในน้ำนิ่งปริมาณน้อย</div>
+    </div>
+    <div class="prevent-card">
+      <div class="prevent-letter">ป</div>
+      <div class="prevent-title">เปลี่ยน</div>
+      <div class="prevent-desc">เปลี่ยนน้ำในแจกันดอกไม้บูชาพระ กระถางต้นไม้รองน้ำ ทุก 7 วัน เพื่อตัดวงจรลูกน้ำยุงลาย</div>
+    </div>
+    <div class="prevent-card">
+      <div class="prevent-letter">ป</div>
+      <div class="prevent-title">ปล่อย</div>
+      <div class="prevent-desc">ปล่อยปลากินลูกน้ำ (เช่น ปลาหางนกยูง) ในอ่างบัวหรืออ่างน้ำในบริเวณวัด ช่วยกำจัดลูกน้ำยุงตามธรรมชาติ</div>
+    </div>
+    <div class="prevent-card">
+      <div class="prevent-letter">ป</div>
+      <div class="prevent-title">ปรับปรุง</div>
+      <div class="prevent-desc">ปรับปรุงสิ่งแวดล้อมให้โปร่งโล่ง ตัดกิ่งไม้ให้แสงแดดส่องถึง กำจัดขยะ วัสดุเหลือใช้ที่อาจกักน้ำ เก็บยางรถเก่า กะลามะพร้าว</div>
+    </div>
+    <div class="prevent-card">
+      <div class="prevent-letter">ป</div>
+      <div class="prevent-title">ปฏิบัติ</div>
+      <div class="prevent-desc">ลงมือทำเป็นประจำทุกสัปดาห์ ไม่ใช่ทำครั้งเดียวแล้วเลิก อาจกำหนดเป็น "วันปราบยุง" ของวัดเดือนละ 2 ครั้ง</div>
+    </div>
+    <div class="prevent-card">
+      <div class="prevent-letter">ข</div>
+      <div class="prevent-title">ขัด (สำคัญมาก!)</div>
+      <div class="prevent-desc">ขัดภาชนะให้สะอาดเพื่อกำจัดไข่ยุงลายที่ติดแน่นตามขอบ เพราะไข่ยุงลายทนแล้งได้นานหลายเดือน แค่เปลี่ยนน้ำอย่างเดียวไม่พอ ต้องขัดด้วย!</div>
+    </div>
+    </div><!-- end prevent-grid -->
+  </div><!-- end ๕ป.๑ข. -->
+
+  <hr class="section-divider" style="margin:2.5rem auto;">
+
+  <!-- ─── หมวด ข: คาถาป้องกันภัย ── -->
+  <div style="background:linear-gradient(135deg,var(--maroon-deep),var(--maroon));border-radius:16px;padding:2.5rem;color:#FFF;position:relative;overflow:hidden;">
+    <div style="position:absolute;top:0;right:0;width:200px;height:200px;background:radial-gradient(circle,rgba(201,168,76,0.15),transparent);border-radius:50%;"></div>
+    <div style="position:relative;z-index:1;">
+      <div style="text-align:center;margin-bottom:2rem;">
+        <div style="font-size:2rem;margin-bottom:0.5rem;">☸</div>
+        <div style="font-family:'Noto Serif Thai',serif;font-size:clamp(1.4rem,3vw,1.8rem);font-weight:900;color:var(--saffron-light);">คาถาป้องกันภัย ๔ ประการ</div>
+        <div style="font-size:2rem;letter-spacing:0.5rem;color:var(--saffron-glow);font-family:'Noto Serif Thai',serif;font-weight:900;margin-top:0.5rem;">"ฉีด — ห่าง — ปิด — เปิด"</div>
+        <div style="color:var(--saffron-glow);opacity:0.7;font-size:0.9rem;margin-top:0.3rem;">หลักปฏิบัติง่าย ๆ ในกิจวัตรประจำวัน</div>
+      </div>
+
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,220px),1fr));gap:1.2rem;">
+
+        <div style="background:rgba(255,255,255,0.1);border:1px solid rgba(201,168,76,0.3);border-radius:12px;padding:1.5rem;backdrop-filter:blur(4px);">
+          <div style="font-size:2rem;margin-bottom:0.5rem;">💉</div>
+          <div style="font-family:'Noto Serif Thai',serif;font-size:1.2rem;font-weight:900;color:var(--saffron-light);margin-bottom:0.4rem;">ฉีด (วัคซีน)</div>
+          <div style="font-size:0.9rem;line-height:1.7;color:var(--saffron-glow);opacity:0.9;">เกราะคุ้มกันที่มั่นคงที่สุด ฉีดวัคซีน MMR และอีสุกอีใสให้ครบตามกำหนด</div>
+        </div>
+
+        <div style="background:rgba(255,255,255,0.1);border:1px solid rgba(201,168,76,0.3);border-radius:12px;padding:1.5rem;backdrop-filter:blur(4px);">
+          <div style="font-size:2rem;margin-bottom:0.5rem;">↔️</div>
+          <div style="font-family:'Noto Serif Thai',serif;font-size:1.2rem;font-weight:900;color:var(--saffron-light);margin-bottom:0.4rem;">ห่าง (ระยะ)</div>
+          <div style="font-size:0.9rem;line-height:1.7;color:var(--saffron-glow);opacity:0.9;">หากทราบว่ามีรูปใดอาพาธ ให้แยกกุฏิทันที หลีกเลี่ยงที่แออัดช่วงระบาด</div>
+        </div>
+
+        <div style="background:rgba(255,255,255,0.1);border:1px solid rgba(201,168,76,0.3);border-radius:12px;padding:1.5rem;backdrop-filter:blur(4px);">
+          <div style="font-size:2rem;margin-bottom:0.5rem;">😷</div>
+          <div style="font-family:'Noto Serif Thai',serif;font-size:1.2rem;font-weight:900;color:var(--saffron-light);margin-bottom:0.4rem;">ปิด (หน้ากาก)</div>
+          <div style="font-size:0.9rem;line-height:1.7;color:var(--saffron-glow);opacity:0.9;">สวมหน้ากากอนามัย (N95 สำหรับดูแลผู้ป่วย) ป้องกันการสูดดมเชื้อในอากาศ</div>
+        </div>
+
+        <div style="background:rgba(255,255,255,0.1);border:1px solid rgba(201,168,76,0.3);border-radius:12px;padding:1.5rem;backdrop-filter:blur(4px);">
+          <div style="font-size:2rem;margin-bottom:0.5rem;">🪟</div>
+          <div style="font-family:'Noto Serif Thai',serif;font-size:1.2rem;font-weight:900;color:var(--saffron-light);margin-bottom:0.4rem;">เปิด (ระบายอากาศ)</div>
+          <div style="font-size:0.9rem;line-height:1.7;color:var(--saffron-glow);opacity:0.9;">เปิดหน้าต่างกุฏิและศาลาให้ลมพัดพาเชื้อออกไป ไม่ให้สะสมในอาคาร</div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <hr class="section-divider" style="margin:2.5rem auto;">
+
+  <!-- ─── หมวด ค: ระยะเวลาแยกตัว ─── -->
+  <div>
+    <div style="display:inline-flex;align-items:center;gap:0.6rem;background:var(--maroon);color:#FFF;padding:0.5rem 1.2rem;border-radius:20px;font-family:'Noto Serif Thai',serif;font-weight:700;font-size:1rem;margin-bottom:0.5rem;">
+      <span>🔒</span> ระยะเวลาแยกตัวเมื่อติดเชื้อ
+    </div>
+    <p style="color:var(--text-muted);font-size:0.92rem;margin-bottom:1.2rem;">แยกกุฏินานแค่ไหนจึงปลอดภัย? — เพื่อป้องกันการระบาดในชุมชนสงฆ์</p>
+
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:1.5rem;">
+
+      <!-- หัดแท้ -->
+      <div style="background:#FFF;border-radius:14px;overflow:hidden;box-shadow:0 3px 20px var(--shadow-warm);">
+        <div style="background:linear-gradient(135deg,#C0392B,#E74C3C);padding:1.2rem 1.5rem;color:#FFF;">
+          <div style="font-size:1.5rem;">🔴</div>
+          <div style="font-family:'Noto Serif Thai',serif;font-weight:900;font-size:1.2rem;">หัดแท้ (Measles)</div>
+        </div>
+        <div style="padding:1.5rem;">
+          <div style="display:flex;align-items:center;gap:0.8rem;margin-bottom:1rem;">
+            <div style="flex-shrink:0;width:56px;height:56px;border-radius:50%;background:#FDEDEC;display:flex;align-items:center;justify-content:center;font-family:'Noto Serif Thai',serif;font-weight:900;font-size:1.2rem;color:#C0392B;">≥4</div>
+            <div>
+              <div style="font-weight:700;color:#C0392B;">วันหลังผื่นขึ้น</div>
+              <div style="font-size:0.85rem;color:var(--text-muted);">นับจากวันแรกที่มีผื่น</div>
+            </div>
+          </div>
+          <div style="background:#FDEDEC;padding:0.8rem 1rem;border-radius:8px;font-size:0.9rem;">
+            <strong style="color:#C0392B;">🔑 เกณฑ์จำ: "นับวัน"</strong><br>
+            ครบ 4 วันหลังผื่นมา = พ้นระยะแพร่เชื้อ<br>
+            <span style="font-size:0.82rem;color:var(--text-muted);">(แพร่เชื้อได้ตั้งแต่ 4 วันก่อนผื่นขึ้นด้วย)</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- หัดเยอรมัน -->
+      <div style="background:#FFF;border-radius:14px;overflow:hidden;box-shadow:0 3px 20px var(--shadow-warm);">
+        <div style="background:linear-gradient(135deg,#7D3C98,#9B59B6);padding:1.2rem 1.5rem;color:#FFF;">
+          <div style="font-size:1.5rem;">🟣</div>
+          <div style="font-family:'Noto Serif Thai',serif;font-weight:900;font-size:1.2rem;">หัดเยอรมัน (Rubella)</div>
+        </div>
+        <div style="padding:1.5rem;">
+          <div style="display:flex;align-items:center;gap:0.8rem;margin-bottom:1rem;">
+            <div style="flex-shrink:0;width:56px;height:56px;border-radius:50%;background:#F5EEF8;display:flex;align-items:center;justify-content:center;font-family:'Noto Serif Thai',serif;font-weight:900;font-size:1.2rem;color:#7D3C98;">7</div>
+            <div>
+              <div style="font-weight:700;color:#7D3C98;">วันหลังผื่นขึ้น</div>
+              <div style="font-size:0.85rem;color:var(--text-muted);">แม้อาการดูเบากว่า แต่แยกนานกว่า</div>
+            </div>
+          </div>
+          <div style="background:#F5EEF8;padding:0.8rem 1rem;border-radius:8px;font-size:0.9rem;">
+            <strong style="color:#7D3C98;">🔑 เกณฑ์จำ: "แยกนานกว่าหัดแท้"</strong><br>
+            แม้อาการจะดูเบากว่า แต่ต้องแยกนานกว่า<br>
+            <span style="font-size:0.82rem;color:var(--text-muted);">เพื่อป้องกันการแพร่สู่โยมที่กำลังตั้งครรภ์</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- อีสุกอีใส -->
+      <div style="background:#FFF;border-radius:14px;overflow:hidden;box-shadow:0 3px 20px var(--shadow-warm);">
+        <div style="background:linear-gradient(135deg,#D35400,#E67E22);padding:1.2rem 1.5rem;color:#FFF;">
+          <div style="font-size:1.5rem;">🟠</div>
+          <div style="font-family:'Noto Serif Thai',serif;font-weight:900;font-size:1.2rem;">อีสุกอีใส (Chickenpox)</div>
+        </div>
+        <div style="padding:1.5rem;">
+          <div style="display:flex;align-items:center;gap:0.8rem;margin-bottom:1rem;">
+            <div style="flex-shrink:0;width:56px;height:56px;border-radius:50%;background:#FEF5E7;display:flex;align-items:center;justify-content:center;font-family:'Noto Serif Thai',serif;font-weight:900;font-size:0.85rem;color:#D35400;text-align:center;line-height:1.1;">5–7<br><span style="font-size:0.65rem;">วัน*</span></div>
+            <div>
+              <div style="font-weight:700;color:#D35400;">จนตุ่มสุดท้ายตกสะเก็ด</div>
+              <div style="font-size:0.85rem;color:var(--text-muted);">ไม่ใช่นับวัน แต่ดูจากอาการ</div>
+            </div>
+          </div>
+          <div style="background:#FEF5E7;padding:0.8rem 1rem;border-radius:8px;font-size:0.9rem;">
+            <strong style="color:#D35400;">🔑 เกณฑ์จำ: "ดูอาการ"</strong><br>
+            ตุ่มน้ำทุกตุ่มต้องตกสะเก็ดและแห้งหมด<br>
+            <span style="font-size:0.82rem;color:var(--text-muted);">(มักใช้เวลาประมาณ 5–7 วันหลังเริ่มออกผื่น)</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div><!-- end ระยะแยกตัว -->
+
+</section>
+
+<div class="divider">◆ ◆ ◆</div>
+
+<!-- ═══════════ ๓. ยาอันตราย ═══════════ -->
+<section class="section section-bg-4 fade-in" id="medicine">
+  <div class="section-header">
+    <div class="section-number">บทที่ ๓</div>
+    <h2 class="section-title">ยาอันตราย — ห้ามหยิบผิด!</h2>
+    <p class="section-subtitle">ข้อควรระวังเรื่องยาลดไข้แก้ปวดที่พบในตู้ยาวัด</p>
+  </div>
+
+  <div class="med-section">
+    <div class="med-safe">
+      <div class="med-icon">✅</div>
+      <div class="med-title">ยาที่ปลอดภัย</div>
+      <div class="med-drug" style="color:#1E8449;">พาราเซตามอล (Paracetamol)</div>
+      <div class="med-reason">ใช้ลดไข้ได้ในทุกกรณี ทานตามปริมาณที่เหมาะสมกับน้ำหนักตัว (ผู้ใหญ่ไม่เกิน 500–1,000 มก. ทุก 4–6 ชม. ไม่เกิน 4,000 มก./วัน) ห่างกันอย่างน้อย 4 ชั่วโมง</div>
+    </div>
+    <div class="med-danger">
+      <div class="med-icon">🚫</div>
+      <div class="med-title">ยาที่ห้ามเด็ดขาด</div>
+      <div class="med-drug" style="color:#C0392B;">แอสไพริน (Aspirin) & NSAIDs (ไอบูโพรเฟน ฯลฯ)</div>
+      <div class="med-reason">
+        <strong>หัด / อีสุกอีใส:</strong> เสี่ยงต่อ "กลุ่มอาการเรย์" (Reye's Syndrome) — ตับวายเฉียบพลันและสมองบวม อาจเสียชีวิตได้<br><br>
+        <strong>ไข้เลือดออก:</strong> ยาทำให้เกล็ดเลือดทำงานผิดปกติ ทำให้เลือดออกในอวัยวะภายในรุนแรงจนถึงแก่ชีวิต
+      </div>
+    </div>
+  </div>
+
+  <div class="monk-tips" style="margin-top:2rem; border-color:#E74C3C; background:linear-gradient(135deg, #FDF2F2, #FDEDEC);">
+    <div class="monk-tips-title" style="color:#C0392B;">⚠️ คำแนะนำสำหรับตู้ยาประจำกุฏิ</div>
+    <div class="monk-tip-item">
+      <div class="tip-bullet" style="background:#C0392B;">๑</div>
+      <div>ตรวจสอบตู้ยาในกุฏิและศาลาวัดให้แน่ใจว่าไม่มีแอสไพรินหรือ NSAIDs ปะปนอยู่ หากมีควรแยกเก็บพร้อมติดป้ายเตือนให้ชัดเจน</div>
+    </div>
+    <div class="monk-tip-item">
+      <div class="tip-bullet" style="background:#C0392B;">๒</div>
+      <div>ยาที่โยมถวาย อาจมียาในกลุ่มต้องห้ามปะปนมา ควรตรวจสอบชื่อสามัญ (Generic name) ก่อนใช้เสมอ</div>
+    </div>
+    <div class="monk-tip-item">
+      <div class="tip-bullet" style="background:#C0392B;">๓</div>
+      <div>หากไม่แน่ใจว่ายาชนิดใดปลอดภัย ให้ใช้เฉพาะพาราเซตามอลเท่านั้น แล้วรีบปรึกษาแพทย์หรือเภสัชกร</div>
+    </div>
+  </div>
+</section>
+
+<hr class="section-divider">
+
+<!-- ═══════════ ๔. สัญญาณเตือน ═══════════ -->
+<section class="section section-bg-5 fade-in" id="warning">
+  <div class="section-header">
+    <div class="section-number">บทที่ ๔</div>
+    <h2 class="section-title">สัญญาณเตือน "ระยะวิกฤต"</h2>
+    <p class="section-subtitle">ต้องรีบไปโรงพยาบาลทันที — โดยเฉพาะช่วงที่ไข้เริ่มลดลง</p>
+  </div>
+
+  <div class="warning-box">
+    <div class="warning-header">
+      <div class="warning-flash">🚨</div>
+      <div>
+        <div class="warning-title">อาการอันตราย — รีบไปหาหมอทันที!</div>
+        <div class="warning-note">สัญญาณเหล่านี้อาจบ่งบอกว่ากำลังเข้าสู่ภาวะช็อก โดยเฉพาะในไข้เลือดออก</div>
+      </div>
+    </div>
+    <ul class="warning-list">
+      <li class="warning-item">
+        <div class="warning-icon-sm">😣</div>
+        <div><strong>ปวดท้องรุนแรง</strong> บริเวณใต้ลิ้นปี่หรือชายโครงขวา (บ่งชี้ตับโตหรือมีเลือดออกในช่องท้อง)</div>
+      </li>
+      <li class="warning-item">
+        <div class="warning-icon-sm">🤮</div>
+        <div><strong>อาเจียนต่อเนื่อง</strong> จนรับประทานน้ำหรืออาหารไม่ได้ เสี่ยงต่อภาวะขาดน้ำรุนแรง</div>
+      </li>
+      <li class="warning-item">
+        <div class="warning-icon-sm">🩸</div>
+        <div><strong>มีเลือดออกผิดปกติ</strong> เช่น เลือดกำเดาไหล ถ่ายดำ (อุจจาระมีเลือดปน) เลือดออกตามไรฟัน หรือจ้ำเลือดตามตัว</div>
+      </li>
+      <li class="warning-item">
+        <div class="warning-icon-sm">🥶</div>
+        <div><strong>มือเท้าเย็น กระสับกระส่าย</strong> หรือซึมลง ไม่ค่อยตอบสนอง เป็นสัญญาณของระบบไหลเวียนเลือดล้มเหลว</div>
+      </li>
+      <li class="warning-item">
+        <div class="warning-icon-sm">💧</div>
+        <div><strong>ปัสสาวะไม่ออกนานกว่า 6 ชั่วโมง</strong> หรือปัสสาวะน้อยมาก แสดงว่าไตเริ่มทำงานผิดปกติจากภาวะขาดน้ำ</div>
+      </li>
+      <li class="warning-item">
+        <div class="warning-icon-sm">😮‍💨</div>
+        <div><strong>หายใจหอบเหนื่อย แน่นหน้าอก</strong> อาจมีน้ำในช่องปอดหรือช่องท้อง ต้องรีบไปโรงพยาบาลโดยด่วน</div>
+      </li>
+    </ul>
+  </div>
+</section>
+
+<div class="divider">◆ ◆ ◆</div>
+
+<!-- ═══════════ ๕. วัคซีน ═══════════ -->
+<section class="section section-bg-6 fade-in" id="vaccine">
+  <div class="section-header">
+    <div class="section-number">บทที่ ๕</div>
+    <h2 class="section-title">วัคซีนเสริมแกร่ง ปี ๒๕๖๘–๒๕๖๙</h2>
+    <p class="section-subtitle">เสริมภูมิคุ้มกันเพื่อสุขภาพที่มั่นคง — แบ่งเป็นวัคซีนพื้นฐาน (ฟรี) และวัคซีนทางเลือก</p>
+  </div>
+
+  <!-- ─── วัคซีนพื้นฐาน ─── -->
+  <div class="vaccine-category-header" style="margin-bottom:1.5rem;">
+    <div style="display:inline-flex;align-items:center;gap:0.6rem;background:var(--green-herb);color:#FFF;padding:0.6rem 1.5rem;border-radius:30px;font-family:'Noto Serif Thai',serif;font-weight:700;font-size:1.1rem;">
+      <span>🆓</span> วัคซีนพื้นฐาน — ได้รับฟรีจากรัฐบาล
+    </div>
+    <p style="color:var(--text-muted);font-size:0.92rem;margin-top:0.6rem;">บรรจุอยู่ในแผนงานสร้างเสริมภูมิคุ้มกันโรค (EPI) เด็กทุกคนได้รับโดยไม่เสียค่าใช้จ่าย</p>
+  </div>
+
+  <div class="vaccine-cards" style="margin-bottom:3rem;">
+    <div class="vaccine-card" style="grid-column:1/-1;max-width:560px;">
+      <div class="vaccine-header mmr" style="position:relative;">
+        <div style="position:absolute;top:0.8rem;right:1rem;background:rgba(255,255,255,0.25);padding:0.2rem 0.8rem;border-radius:12px;font-size:0.75rem;font-weight:700;">ฟรี</div>
+        <div class="vaccine-name">💉 MMR</div>
+        <div class="vaccine-target">ป้องกันหัด + หัดเยอรมัน + คางทูม</div>
+      </div>
+      <div class="vaccine-body">
+        <div class="vaccine-stat">
+          <div class="vaccine-stat-icon">💊</div>
+          <div>ต้องได้รับทั้งหมด <strong>2 เข็ม</strong> ตามกำหนด</div>
+        </div>
+        <div class="vaccine-stat">
+          <div class="vaccine-stat-icon">📅</div>
+          <div>เข็มที่ 1: อายุ <strong>9–12 เดือน</strong> / เข็มที่ 2: อายุ <strong>1 ปี 6 เดือน ถึง 2 ปีครึ่ง</strong></div>
+        </div>
+        <div class="vaccine-stat">
+          <div class="vaccine-stat-icon">🛡️</div>
+          <div>ประสิทธิภาพป้องกันหัดสูงถึง <strong>97%</strong> หลังฉีดครบ 2 เข็ม</div>
+        </div>
+        <div class="vaccine-stat">
+          <div class="vaccine-stat-icon">👨‍⚕️</div>
+          <div>ผู้ใหญ่ที่ไม่เคยฉีดหรือฉีดไม่ครบ สามารถฉีดเพิ่มได้ โดยเฉพาะช่วงมีการระบาด</div>
+        </div>
+        <div class="vaccine-stat" style="border-bottom:none;">
+          <div class="vaccine-stat-icon">⚠️</div>
+          <div style="color:var(--red-alert);font-weight:600;">การได้รับไม่ครบ 2 เข็มเป็นปัจจัยเสี่ยงสำคัญที่ทำให้เกิดการระบาดในกลุ่มเด็กโตและผู้ใหญ่</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ─── วัคซีนทางเลือก ─── -->
+  <div class="vaccine-category-header" style="margin-bottom:1.5rem;">
+    <div style="display:inline-flex;align-items:center;gap:0.6rem;background:var(--blue-calm);color:#FFF;padding:0.6rem 1.5rem;border-radius:30px;font-family:'Noto Serif Thai',serif;font-weight:700;font-size:1.1rem;">
+      <span>💰</span> วัคซีนทางเลือก — ต้องชำระค่าใช้จ่ายเอง
+    </div>
+    <p style="color:var(--text-muted);font-size:0.92rem;margin-top:0.6rem;">นวัตกรรมวัคซีนเสริมที่แนะนำเพื่อเพิ่มการป้องกัน แต่ยังไม่รวมในสิทธิฟรีพื้นฐาน</p>
+  </div>
+
+  <div class="vaccine-cards">
+
+    <!-- Varicella -->
+    <div class="vaccine-card">
+      <div class="vaccine-header varicella" style="position:relative;">
+        <div style="position:absolute;top:0.8rem;right:1rem;background:rgba(255,255,255,0.25);padding:0.2rem 0.8rem;border-radius:12px;font-size:0.75rem;font-weight:700;">จ่ายเอง</div>
+        <div class="vaccine-name">💉 Varicella</div>
+        <div class="vaccine-target">ป้องกันอีสุกอีใส (Chickenpox)</div>
+      </div>
+      <div class="vaccine-body">
+        <div class="vaccine-stat">
+          <div class="vaccine-stat-icon">👶</div>
+          <div><strong>เด็ก:</strong> ฉีด 2 เข็ม — เข็มแรกอายุ 12–15 เดือน, เข็มที่สอง 1 ปี 6 เดือน ถึง 4 ปี</div>
+        </div>
+        <div class="vaccine-stat">
+          <div class="vaccine-stat-icon">👤</div>
+          <div><strong>ผู้ใหญ่</strong>ที่ไม่เคยเป็น: ฉีด <strong>2 เข็ม</strong> ห่างกันอย่างน้อย 4–8 สัปดาห์</div>
+        </div>
+        <div class="vaccine-stat">
+          <div class="vaccine-stat-icon">🛡️</div>
+          <div>ประสิทธิภาพป้องกันได้ <strong>90%</strong> ขึ้นไป</div>
+        </div>
+        <div class="vaccine-stat" style="border-bottom:none;">
+          <div class="vaccine-stat-icon">🔄</div>
+          <div>ช่วยลดโอกาสเกิด<strong>งูสวัด</strong>ในอนาคตด้วย</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Qdenga -->
+    <div class="vaccine-card">
+      <div class="vaccine-header qdenga" style="position:relative;">
+        <div style="position:absolute;top:0.8rem;right:1rem;background:rgba(255,255,255,0.25);padding:0.2rem 0.8rem;border-radius:12px;font-size:0.75rem;font-weight:700;">จ่ายเอง</div>
+        <div class="vaccine-name">💉 Qdenga (คิวเดงกา)</div>
+        <div class="vaccine-target">ป้องกันไข้เลือดออก — นิยมสูงในปี ๒๕๖๙</div>
+      </div>
+      <div class="vaccine-body">
+        <div class="vaccine-stat">
+          <div class="vaccine-stat-icon">✨</div>
+          <div>ฉีดได้ทั้งผู้ที่<strong>เคยและไม่เคย</strong>เป็นไข้เลือดออก (ไม่ต้องตรวจภูมิคุ้มกันก่อนฉีด)</div>
+        </div>
+        <div class="vaccine-stat">
+          <div class="vaccine-stat-icon">💊</div>
+          <div>ฉีด <strong>2 เข็ม</strong> ห่างกัน 3 เดือน</div>
+        </div>
+        <div class="vaccine-stat">
+          <div class="vaccine-stat-icon">👤</div>
+          <div>กลุ่มอายุ: <strong>4–60 ปี</strong></div>
+        </div>
+        <div class="vaccine-stat" style="border-bottom:none;">
+          <div class="vaccine-stat-icon">🏥</div>
+          <div>ลดการนอนโรงพยาบาลได้สูงถึง <strong>90.4%</strong></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Dengvaxia -->
+    <div class="vaccine-card">
+      <div class="vaccine-header" style="background:linear-gradient(135deg, #1A5276, #2E86C1);position:relative;">
+        <div style="position:absolute;top:0.8rem;right:1rem;background:rgba(255,255,255,0.25);padding:0.2rem 0.8rem;border-radius:12px;font-size:0.75rem;font-weight:700;">จ่ายเอง</div>
+        <div class="vaccine-name">💉 Dengvaxia</div>
+        <div class="vaccine-target">ป้องกันไข้เลือดออก — เฉพาะผู้ที่เคยเป็นมาก่อน</div>
+      </div>
+      <div class="vaccine-body">
+        <div class="vaccine-stat" style="background:#FDF2F2;border-radius:8px;padding:0.8rem;margin-bottom:0.5rem;">
+          <div class="vaccine-stat-icon">🚨</div>
+          <div style="color:var(--red-alert);font-weight:600;">ฉีดได้เฉพาะผู้ที่<strong>เคยเป็น</strong>ไข้เลือดออกมาก่อนเท่านั้น</div>
+        </div>
+        <div class="vaccine-stat">
+          <div class="vaccine-stat-icon">💊</div>
+          <div>ฉีด <strong>3 เข็ม</strong> ห่างกันเข็มละ 6 เดือน</div>
+        </div>
+        <div class="vaccine-stat">
+          <div class="vaccine-stat-icon">👤</div>
+          <div>กลุ่มอายุ: <strong>6–45 ปี</strong></div>
+        </div>
+        <div class="vaccine-stat" style="border-bottom:none;">
+          <div class="vaccine-stat-icon">⚠️</div>
+          <div>หากฉีดให้ผู้ที่ไม่เคยเป็น อาจเพิ่มความเสี่ยงอาการรุนแรงได้</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- สรุปเปรียบเทียบวัคซีนไข้เลือดออก -->
+  <div class="monk-tips" style="margin-top:2rem;border-color:var(--blue-calm);background:linear-gradient(135deg,#EBF5FB,#D6EAF8);">
+    <div class="monk-tips-title" style="color:var(--blue-calm);">📋 เปรียบเทียบวัคซีนไข้เลือดออก 2 ชนิด</div>
+    <div style="overflow-x:auto;">
+      <table style="width:100%;border-collapse:collapse;font-size:0.92rem;margin-top:0.8rem;">
+        <thead>
+          <tr>
+            <th style="text-align:left;padding:0.7rem;background:var(--blue-calm);color:#FFF;border-radius:8px 0 0 0;">ลักษณะ</th>
+            <th style="padding:0.7rem;background:#2E86C1;color:#FFF;text-align:center;">Qdenga</th>
+            <th style="padding:0.7rem;background:#1A5276;color:#FFF;border-radius:0 8px 0 0;text-align:center;">Dengvaxia</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr style="background:#FFF;">
+            <td style="padding:0.6rem;font-weight:600;border-bottom:1px solid #D6EAF8;">ผู้ที่ฉีดได้</td>
+            <td style="padding:0.6rem;text-align:center;border-bottom:1px solid #D6EAF8;color:var(--green-herb);font-weight:600;">เคย + ไม่เคยเป็น</td>
+            <td style="padding:0.6rem;text-align:center;border-bottom:1px solid #D6EAF8;color:var(--red-alert);font-weight:600;">เคยเป็นเท่านั้น</td>
+          </tr>
+          <tr style="background:var(--cream);">
+            <td style="padding:0.6rem;font-weight:600;border-bottom:1px solid #D6EAF8;">ตรวจภูมิก่อน</td>
+            <td style="padding:0.6rem;text-align:center;border-bottom:1px solid #D6EAF8;">ไม่ต้อง</td>
+            <td style="padding:0.6rem;text-align:center;border-bottom:1px solid #D6EAF8;">ต้องตรวจ</td>
+          </tr>
+          <tr style="background:#FFF;">
+            <td style="padding:0.6rem;font-weight:600;border-bottom:1px solid #D6EAF8;">จำนวนเข็ม</td>
+            <td style="padding:0.6rem;text-align:center;border-bottom:1px solid #D6EAF8;">2 เข็ม (ห่าง 3 เดือน)</td>
+            <td style="padding:0.6rem;text-align:center;border-bottom:1px solid #D6EAF8;">3 เข็ม (ห่าง 6 เดือน)</td>
+          </tr>
+          <tr style="background:var(--cream);">
+            <td style="padding:0.6rem;font-weight:600;border-bottom:1px solid #D6EAF8;">อายุ</td>
+            <td style="padding:0.6rem;text-align:center;border-bottom:1px solid #D6EAF8;">4–60 ปี</td>
+            <td style="padding:0.6rem;text-align:center;border-bottom:1px solid #D6EAF8;">6–45 ปี</td>
+          </tr>
+          <tr style="background:#FFF;">
+            <td style="padding:0.6rem;font-weight:600;">ลดการนอน รพ.</td>
+            <td style="padding:0.6rem;text-align:center;color:var(--green-herb);font-weight:700;">90.4%</td>
+            <td style="padding:0.6rem;text-align:center;">—</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<hr class="section-divider">
+
+<!-- ═══════════ ๗. เมื่อระบาดทำอย่างไร ═══════════ -->
+<section class="section section-bg-7 fade-in" id="outbreak">
+  <div class="section-header">
+    <div class="section-number">บทที่ ๖</div>
+    <h2 class="section-title">เมื่อระบาดทำอย่างไร</h2>
+    <p class="section-subtitle">เชื้อหัดลอยในอากาศได้นานถึง ๒ ชั่วโมง แม้ผู้ป่วยออกจากห้องไปแล้ว</p>
+  </div>
+
+  <!-- ── Alert Box ── -->
+  <div style="background:linear-gradient(135deg,#FDF2F2,#FDEDEC);border:2px solid var(--red-alert);border-radius:12px;padding:1.2rem 1.5rem;margin-bottom:2rem;display:flex;align-items:center;gap:1rem;">
+    <div style="font-size:2rem;flex-shrink:0;">⚡</div>
+    <div style="font-size:0.95rem;color:var(--red-alert);line-height:1.6;">
+      <strong>สำคัญ:</strong> เชื้อไวรัสหัด (Measles) สามารถลอยอยู่ในอากาศได้นานถึง <strong>๒ ชั่วโมง</strong> หลังผู้ป่วยออกจากห้องไปแล้ว จึงต้องระมัดระวังเป็นพิเศษในพื้นที่ปิดอย่างศาลาหรือกุฏิ
+    </div>
+  </div>
+
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,320px),1fr));gap:1.5rem;">
+
+    <!-- การแยกกุฏิ -->
+    <div class="prevent-card" style="border-left-color:var(--red-alert);">
+      <div class="prevent-letter" style="background:var(--red-alert);">๑</div>
+      <div class="prevent-title">การแยกกุฏิ (Isolation)</div>
+      <div class="prevent-desc">
+        ผู้ป่วย<strong>โรคหัด</strong>ต้องแยกตัวอย่างน้อย <strong>4 วัน</strong>หลังผื่นขึ้น<br>
+        ผู้ป่วย<strong>หัดเยอรมัน</strong>ต้องแยกตัว <strong>7 วัน</strong>หลังผื่นขึ้น<br>
+        ผู้ป่วย<strong>อีสุกอีใส</strong>ต้องแยกจนกว่า<strong>ตุ่มสุดท้ายจะตกสะเก็ดแห้ง</strong><br>
+        <span style="font-size:0.85rem;color:var(--text-muted);">จัดกุฏิแยกไว้ต่างหาก มีห้องน้ำแยกหากเป็นไปได้</span>
+      </div>
+    </div>
+
+    <!-- สิ่งของส่วนตัว -->
+    <div class="prevent-card" style="border-left-color:var(--orange-warm);">
+      <div class="prevent-letter" style="background:var(--orange-warm);">๒</div>
+      <div class="prevent-title">ห้ามใช้สิ่งของร่วมกัน</div>
+      <div class="prevent-desc">
+        ไม่ใช้<strong>บาตร จีวร ผ้าเช็ดตัว</strong> หรือของใช้ส่วนตัวร่วมกัน แยกแก้วน้ำ ช้อน จาน ของผู้ป่วยออกให้ชัดเจน ซักผ้าและภาชนะของผู้ป่วยแยกจากรูปอื่น
+      </div>
+    </div>
+
+    <!-- สุขอนามัย -->
+    <div class="prevent-card" style="border-left-color:var(--blue-calm);">
+      <div class="prevent-letter" style="background:var(--blue-calm);">๓</div>
+      <div class="prevent-title">สุขอนามัยมือ</div>
+      <div class="prevent-desc">
+        หมั่น<strong>ล้างมือบ่อย ๆ</strong> ด้วยน้ำและสบู่อย่างน้อย 20 วินาที หรือใช้เจลแอลกอฮอล์ โดยเฉพาะ<strong>ก่อนฉันภัตตาหาร</strong> หลังเข้าห้องน้ำ และหลังสัมผัสสิ่งของสาธารณะ
+      </div>
+    </div>
+
+    <!-- การทำความสะอาด -->
+    <div class="prevent-card" style="border-left-color:var(--purple-soft);">
+      <div class="prevent-letter" style="background:var(--purple-soft);">๔</div>
+      <div class="prevent-title">ทำความสะอาดอย่างถูกวิธี</div>
+      <div class="prevent-desc">
+        ใช้<strong>ผ้าชุบน้ำยาฆ่าเชื้อเช็ดถู</strong>พื้นผิว แทนการกวาดหรือปัดฝุ่นที่อาจทำให้เชื้อฟุ้งกระจาย เน้นบริเวณลูกบิดประตู ราวบันได สวิตช์ไฟ พื้นห้อง และของใช้ที่สัมผัสร่วม
+      </div>
+    </div>
+
+    <!-- หน้ากาก -->
+    <div class="prevent-card" style="border-left-color:var(--maroon);">
+      <div class="prevent-letter" style="background:var(--maroon);">๕</div>
+      <div class="prevent-title">หน้ากากอนามัย</div>
+      <div class="prevent-desc">
+        ผู้ดูแลพระอาพาธควรสวม<strong>หน้ากาก N95</strong> เสมอ เนื่องจากเชื้อหัดและอีสุกอีใสแพร่ทางอากาศ หน้ากากอนามัยธรรมดาช่วยลดความเสี่ยงได้บางส่วน แต่ไม่สมบูรณ์เท่า N95
+      </div>
+    </div>
+
+    <!-- แจ้งสาธารณสุข -->
+    <div class="prevent-card" style="border-left-color:var(--green-herb);">
+      <div class="prevent-letter" style="background:var(--green-herb);">๖</div>
+      <div class="prevent-title">แจ้งสาธารณสุขในพื้นที่</div>
+      <div class="prevent-desc">
+        หากพบผู้ป่วยหลายรูปในช่วงเวลาใกล้กัน ควร<strong>แจ้ง รพ.สต. หรือ สสจ.</strong> เพื่อประเมินสถานการณ์ ติดตามผู้สัมผัสโรค และพิจารณาฉีดวัคซีนเสริมให้ผู้ที่ยังไม่มีภูมิคุ้มกัน
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ── Strength Tips ── -->
+  <div class="monk-tips" style="margin-top:2rem;">
+    <div class="monk-tips-title">💪 เสริมสร้างภูมิคุ้มกันตามวิถีสมณะ</div>
+    <div class="monk-tip-item">
+      <div class="tip-bullet">๑</div>
+      <div><strong>พักผ่อนให้เพียงพอ:</strong> นอนหลับ 6–8 ชั่วโมง ร่างกายต้องการพลังงานในการสร้างภูมิคุ้มกัน การอดนอนทำให้ภูมิต้านทานอ่อนแอลง</div>
+    </div>
+    <div class="monk-tip-item">
+      <div class="tip-bullet">๒</div>
+      <div><strong>ฉันภัตตาหารที่ถูกสุขลักษณะ:</strong> อาหารที่โยมถวายควรปรุงสุก สะอาด หลากหลาย เน้นผักผลไม้ที่มีวิตามิน C และโปรตีน เพื่อให้ร่างกายแข็งแรง</div>
+    </div>
+    <div class="monk-tip-item">
+      <div class="tip-bullet">๓</div>
+      <div><strong>ดื่มน้ำเพียงพอ:</strong> ดื่มน้ำสะอาดอย่างน้อย 6–8 แก้วต่อวัน โดยเฉพาะในฤดูร้อนหรือเมื่อต้องปฏิบัติกิจวัตรกลางแจ้ง</div>
+    </div>
+    <div class="monk-tip-item">
+      <div class="tip-bullet">๔</div>
+      <div><strong>เดินจงกรม — ออกกำลังกายในวิถีธรรม:</strong> การเดินจงกรมเป็นประจำช่วยเสริมสร้างระบบไหลเวียนเลือดและภูมิคุ้มกัน เป็นการออกกำลังกายที่เหมาะสมกับเพศบรรพชิต</div>
+    </div>
+  </div>
+</section>
+
+<hr class="section-divider">
+
+<!-- ═══════════ เนื้อหาเพิ่มเติม: ข้อปฏิบัติในวัด ═══════════ -->
+<section class="section section-bg-6 fade-in" id="monkcare">
+  <div class="section-header">
+    <div class="section-number">เนื้อหาเพิ่มเติม</div>
+    <h2 class="section-title">ข้อปฏิบัติดูแลสุขภาพในวัด</h2>
+    <p class="section-subtitle">การดูแลร่างกายให้เหมาะสมกับวิถีสมณะ</p>
+  </div>
+
+  <div class="monk-tips">
+    <div class="monk-tips-title">🏛️ เมื่อพระหรือเณรมีไข้ — ควรปฏิบัติอย่างไร</div>
+    <div class="monk-tip-item">
+      <div class="tip-bullet">๑</div>
+      <div><strong>แยกกุฏิ:</strong> หากสงสัยโรคติดเชื้อ ควรจำวัดแยกจากพระรูปอื่น หลีกเลี่ยงการใช้สิ่งของร่วมกัน เช่น แก้วน้ำ ผ้าเช็ดตัว</div>
+    </div>
+    <div class="monk-tip-item">
+      <div class="tip-bullet">๒</div>
+      <div><strong>ดื่มน้ำให้เพียงพอ:</strong> ดื่มน้ำเปล่า น้ำข้าว หรือน้ำเกลือแร่ (ORS) บ่อย ๆ ทีละน้อย โดยเฉพาะหากมีไข้สูง อาเจียน หรือท้องเสีย เพื่อป้องกันภาวะขาดน้ำ</div>
+    </div>
+    <div class="monk-tip-item">
+      <div class="tip-bullet">๓</div>
+      <div><strong>วัดไข้สม่ำเสมอ:</strong> วัดอุณหภูมิทุก 4–6 ชั่วโมง จดบันทึกไว้เพื่อแจ้งแพทย์ สังเกตว่าไข้ขึ้นหรือลงเมื่อไหร่ ลดลงแล้วกลับมาหรือไม่</div>
+    </div>
+    <div class="monk-tip-item">
+      <div class="tip-bullet">๔</div>
+      <div><strong>เช็ดตัวลดไข้:</strong> ใช้ผ้าชุบน้ำธรรมดา (ไม่เย็นจัด) เช็ดบริเวณซอกคอ รักแร้ ขาหนีบ เพื่อช่วยระบายความร้อน ร่วมกับการรับประทานพาราเซตามอล</div>
+    </div>
+    <div class="monk-tip-item">
+      <div class="tip-bullet">๕</div>
+      <div><strong>พักผ่อนให้เพียงพอ:</strong> งดกิจวัตรหนัก เช่น กวาดลานวัด จัดเสนาสนะ ให้ร่างกายได้พักฟื้นอย่างเต็มที่จนกว่าจะหายดี</div>
+    </div>
+    <div class="monk-tip-item">
+      <div class="tip-bullet">๖</div>
+      <div><strong>สังเกตสัญญาณวิกฤต:</strong> มอบหมายให้พระรูปอื่นหรือญาติโยมช่วยสังเกตอาการ หากพบสัญญาณเตือนตามที่ระบุข้างต้น ต้องรีบนำส่งโรงพยาบาลทันที</div>
+    </div>
+  </div>
+
+  <div class="monk-tips" style="margin-top: 1.5rem;">
+    <div class="monk-tips-title">🧹 การป้องกันโรคติดต่อในชุมชนสงฆ์</div>
+    <div class="monk-tip-item">
+      <div class="tip-bullet">๑</div>
+      <div><strong>ล้างมือบ่อย ๆ:</strong> ล้างมือด้วยสบู่หรือเจลแอลกอฮอล์ก่อนฉันอาหาร หลังเข้าห้องน้ำ และหลังสัมผัสสิ่งสาธารณะ</div>
+    </div>
+    <div class="monk-tip-item">
+      <div class="tip-bullet">๒</div>
+      <div><strong>ทำความสะอาดศาลาและกุฏิ:</strong> ใช้ผ้าชุบน้ำยาฆ่าเชื้อเช็ดถูพื้นผิวที่สัมผัสบ่อย เช่น ลูกบิดประตู ราวบันได สวิตช์ไฟ <strong>หลีกเลี่ยงการกวาดหรือปัดฝุ่น</strong>ซึ่งอาจทำให้เชื้อฟุ้งกระจายในอากาศ</div>
+    </div>
+    <div class="monk-tip-item">
+      <div class="tip-bullet">๓</div>
+      <div><strong>ระบายอากาศ:</strong> เปิดหน้าต่างให้อากาศถ่ายเท โดยเฉพาะศาลาที่มีพระเณรรวมกันจำนวนมาก เพื่อลดการสะสมของเชื้อโรคในอากาศ</div>
+    </div>
+    <div class="monk-tip-item">
+      <div class="tip-bullet">๔</div>
+      <div><strong>จัดการภาชนะฉันอาหาร:</strong> ล้างบาตร ถ้วย จาน ด้วยน้ำร้อนและน้ำยาล้างจาน ผึ่งแดดให้แห้ง ไม่ใช้ภาชนะร่วมกัน</div>
+    </div>
+    <div class="monk-tip-item">
+      <div class="tip-bullet">๕</div>
+      <div><strong>ป้องกันยุงกัด:</strong> ใช้มุ้งกางนอน ทายากันยุงที่ปลอดภัย (ไม่มีกลิ่นหอมเกินไป) และสวมจีวรปกปิดมิดชิดในช่วงเช้าและเย็นซึ่งยุงลายชุกชุม</div>
+    </div>
+    <div class="monk-tip-item">
+      <div class="tip-bullet">๖</div>
+      <div><strong>ตรวจสอบประวัติวัคซีน:</strong> สามเณรบวชใหม่ควรตรวจสอบว่าได้รับวัคซีนพื้นฐานครบหรือไม่ หากไม่แน่ใจสามารถขอฉีดเพิ่มได้ที่สถานพยาบาล</div>
+    </div>
+  </div>
+</section>
+
+<div class="divider">◆ ◆ ◆</div>
+
+<!-- ═══════════ คำถามที่พบบ่อย ═══════════ -->
+<section class="section section-bg-kid fade-in" id="faq">
+  <div class="section-header">
+    <div class="section-icon">❓</div>
+    <h2 class="section-title">คำถามที่พบบ่อย</h2>
+    <p class="section-subtitle">เรื่องที่พระภิกษุและสามเณรมักสอบถามเกี่ยวกับโรคติดเชื้อ</p>
+  </div>
+
+  <div class="faq-item">
+    <div class="faq-q" onclick="this.parentElement.classList.toggle('open')">
+      หากเป็นไข้เลือดออก ดื่มน้ำอะไรดีที่สุด?
+      <span class="faq-arrow">▼</span>
+    </div>
+    <div class="faq-a">
+      <div class="faq-a-text">ดื่มน้ำเปล่าสะอาด น้ำข้าว น้ำเกลือแร่ ORS หรือน้ำผลไม้ (ไม่ใช่น้ำสีแดง/ดำ เพราะอาจสับสนกับเลือดออก) ดื่มทีละน้อยแต่บ่อย ๆ ตลอดวัน หลีกเลี่ยงเครื่องดื่มที่มีคาเฟอีนเพราะทำให้ปัสสาวะบ่อยและขาดน้ำเร็วขึ้น ห้ามดื่มน้ำผลไม้สีดำ/แดง เช่น น้ำองุ่น น้ำทับทิม เพราะอาจทำให้แพทย์สับสนกับเลือดออกในกระเพาะอาหาร</div>
+    </div>
+  </div>
+
+  <div class="faq-item">
+    <div class="faq-q" onclick="this.parentElement.classList.toggle('open')">
+      อีสุกอีใสคันมาก ทำอย่างไรไม่ให้เกา?
+      <span class="faq-arrow">▼</span>
+    </div>
+    <div class="faq-a">
+      <div class="faq-a-text">อาบน้ำด้วยน้ำอุ่นสะอาด หลีกเลี่ยงการขัดถูแรง ใช้โลชั่นคาลาไมน์ (Calamine Lotion) ทาบริเวณที่คัน ตัดเล็บให้สั้น รักษาความสะอาดเพื่อป้องกันการติดเชื้อแบคทีเรียซ้ำ หากคันมากจนทนไม่ไหว แพทย์อาจจ่ายยาแก้แพ้ (Antihistamine) ให้</div>
+    </div>
+  </div>
+
+  <div class="faq-item">
+    <div class="faq-q" onclick="this.parentElement.classList.toggle('open')">
+      พระเคยเป็นอีสุกอีใสแล้ว จะเป็นซ้ำได้อีกไหม?
+      <span class="faq-arrow">▼</span>
+    </div>
+    <div class="faq-a">
+      <div class="faq-a-text">โดยทั่วไปจะไม่เป็นอีสุกอีใสซ้ำ เพราะร่างกายสร้างภูมิคุ้มกันแล้ว แต่เชื้อ Varicella-Zoster จะหลบซ่อนอยู่ในปมประสาท และอาจกลับมาเป็น "งูสวัด" (Herpes Zoster) ได้เมื่ออายุมากขึ้นหรือภูมิคุ้มกันอ่อนแอลง งูสวัดจะมีตุ่มน้ำขึ้นตามแนวเส้นประสาทข้างใดข้างหนึ่ง เจ็บปวดแสบร้อนมาก</div>
+    </div>
+  </div>
+
+  <div class="faq-item">
+    <div class="faq-q" onclick="this.parentElement.classList.toggle('open')">
+      เณรบวชใหม่ ต้องฉีดวัคซีนอะไรบ้าง?
+      <span class="faq-arrow">▼</span>
+    </div>
+    <div class="faq-a">
+      <div class="faq-a-text">สิ่งสำคัญที่สุดคือตรวจสอบว่าได้รับวัคซีน MMR ครบ 2 เข็มหรือยัง (วัคซีนนี้รัฐจัดให้ฟรี ฉีดไม่ครบเป็นปัจจัยเสี่ยงสำคัญที่ทำให้เกิดการระบาด) นอกจากนี้ยังมีวัคซีนทางเลือกที่แนะนำแต่ต้องจ่ายเอง คือ วัคซีน Varicella (อีสุกอีใส) สำหรับผู้ที่ไม่เคยเป็น และวัคซีน Qdenga (ไข้เลือดออก) ฉีดได้ตั้งแต่อายุ 4 ปีขึ้นไป ปรึกษาเจ้าหน้าที่สาธารณสุขในพื้นที่หรือ รพ.สต. ใกล้วัดได้</div>
+    </div>
+  </div>
+
+  <div class="faq-item">
+    <div class="faq-q" onclick="this.parentElement.classList.toggle('open')">
+      หัดกับหัดเยอรมันต่างกันอย่างไร?
+      <span class="faq-arrow">▼</span>
+    </div>
+    <div class="faq-a">
+      <div class="faq-a-text">หัดแท้มีไข้สูงกว่ามาก มีอาการ 3C คือไอ น้ำมูก ตาแดง ผื่นรุนแรงและลามจากบนลงล่าง ส่วนหัดเยอรมันไข้ต่ำกว่า ผื่นจางกว่า หายเร็วภายใน 3 วัน และมีอาการต่อมน้ำเหลืองบวมบริเวณหลังหูเป็นลักษณะเฉพาะ หัดเยอรมันอันตรายน้อยกว่าสำหรับคนทั่วไป แต่อันตรายมากสำหรับหญิงตั้งครรภ์</div>
+    </div>
+  </div>
+
+  <div class="faq-item">
+    <div class="faq-q" onclick="this.parentElement.classList.toggle('open')">
+      ไข้สูงแต่ไม่มีน้ำมูกไม่มีไอ หมายความว่าอะไร?
+      <span class="faq-arrow">▼</span>
+    </div>
+    <div class="faq-a">
+      <div class="faq-a-text">อาการไข้สูงลอยแต่ไม่มีอาการทางระบบหายใจ (ไม่ไอ ไม่มีน้ำมูก) ร่วมกับปวดกระบอกตา ปวดเมื่อยกระดูก อ่อนเพลียมาก ควรนึกถึงไข้เลือดออกเป็นอันดับแรก โดยเฉพาะในช่วงฤดูฝนที่ยุงลายชุกชุม ควรไปพบแพทย์เพื่อตรวจเลือดภายใน 1–2 วันหลังมีไข้</div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ ทำแบบทดสอบ (ลิงก์ quiz + Apps Script) ═══════════ -->
+<section class="section section-quiz-cta fade-in" id="quiz-cta">
+  <div class="section-header">
+    <div class="section-icon">📝</div>
+    <h2 class="section-title">แบบทดสอบหลังเรียนรู้</h2>
+    <p class="section-subtitle">ทดสอบความเข้าใจเรื่องหัด หัดเยอรมัน อีสุกอีใส และไข้เลือดออก — บันทึกคะแนนและดูกระดานคะแนนสูงสุด</p>
+  </div>
+  <div class="quiz-cta-wrap">
+    <a href="quiz.html" class="quiz-cta-btn">ไปทำแบบทดสอบ →</a>
+  </div>
+</section>
+
+<!-- ═══════════ FOOTER ═══════════ -->
+<footer class="footer">
+  <div class="footer-lotus">🪷</div>
+  <div class="footer-text">
+    <strong>อโรคยา ปรมา ลาภา</strong><br>
+    ความไม่มีโรค เป็นลาภอันประเสริฐ<br><br>
+    เว็บไซต์นี้จัดทำเพื่อเป็นสื่อการเรียนรู้สำหรับพระภิกษุและสามเณร<br>
+    หากมีอาการเจ็บป่วย ควรปรึกษาแพทย์หรือเจ้าหน้าที่สาธารณสุข
+  </div>
+  <div class="footer-credit">
+    จัดทำเนื้อหาโดย โครงการ Multi-omics สุขภาพสงฆ์ & โครงการส่งเสริมความรู้ด้านสุขภาพ โรงพยาบาลสงฆ์ กรุงเทพมหานคร &copy; ๒๕๖๙
+  </div>
+  <div class="footer-bottom">
+    <span>© 2026 directed by <a href="mailto:Uradev222@gmail.com">Uradev</a></span>
+    <span class="footer-bottom-right">โครงการส่งเสริมความรู้ด้านสุขภาพ (Health Literacy)</span>
+  </div>
+</footer>
+
+<script>
+// Intersection Observer for fade-in
+const obs = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      e.target.classList.add('visible');
+    }
+  });
+}, { threshold: 0.1 });
+
+document.querySelectorAll('.fade-in').forEach(el => obs.observe(el));
+
+// Hamburger เมนูมือถือ
+const nav = document.getElementById('main-nav');
+const navToggle = document.getElementById('nav-toggle');
+if (nav && navToggle) {
+  navToggle.addEventListener('click', () => nav.classList.toggle('nav-open'));
+  document.querySelectorAll('.nav-menu .nav-link').forEach(link => {
+    link.addEventListener('click', () => nav.classList.remove('nav-open'));
+  });
+}
+
+// Active nav highlight
+const sections = document.querySelectorAll('.section[id]');
+const navLinks = document.querySelectorAll('.nav-link');
+
+window.addEventListener('scroll', () => {
+  let current = '';
+  sections.forEach(s => {
+    if (window.scrollY >= s.offsetTop - 120) {
+      current = s.getAttribute('id');
+    }
+  });
+  navLinks.forEach(link => {
+    link.classList.toggle('active', link.getAttribute('href') === '#' + current);
+  });
+});
+</script>
+
+</body>
+</html>

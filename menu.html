@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>เมนูหลัก — สุขภาพดี สมณะมั่นคง</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Thai:wght@300;400;500;600;700;800;900&family=Noto+Serif+Thai:wght@400;600;700;900&family=Sarabun:wght@300;400;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --saffron: #E8920B;
+  --saffron-light: #F5B731;
+  --saffron-glow: #FDE7A9;
+  --maroon: #6B1D1D;
+  --maroon-deep: #4A1010;
+  --cream: #FFF8EC;
+  --cream-warm: #FFF3DB;
+  --gold: #C9A84C;
+  --green-herb: #4A7C59;
+  --blue-calm: #2C6E8A;
+  --orange-warm: #D35400;
+  --purple-soft: #7D3C98;
+  --bg-body: #FAF4E8;
+  --text-main: #3B2E1A;
+  --text-muted: #7A6B55;
+  --shadow-warm: rgba(107, 29, 29, 0.12);
+  --shadow-gold: rgba(201, 168, 76, 0.2);
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'Sarabun', 'Noto Sans Thai', sans-serif;
+  background-color: var(--bg-body);
+  background-image: url('images/watmoolee2.jpg');
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  color: var(--text-main);
+  line-height: 1.6;
+  font-size: 17px;
+  overflow-x: hidden;
+}
+
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(250, 244, 232, 0.92) 0%, rgba(250, 244, 232, 0.88) 100%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+::-webkit-scrollbar { width: 8px; }
+::-webkit-scrollbar-track { background: var(--cream); }
+::-webkit-scrollbar-thumb { background: var(--saffron); border-radius: 4px; }
+
+/* ── Header ── */
+.menu-header {
+  position: relative;
+  z-index: 1;
+  background: linear-gradient(165deg, var(--maroon-deep) 0%, var(--maroon) 50%, #8B3A1D 100%);
+  color: var(--saffron-glow);
+  padding: 2rem 1.5rem;
+  text-align: center;
+  border-bottom: 3px solid var(--gold);
+  box-shadow: 0 4px 20px var(--shadow-warm);
+}
+.menu-header .dhamma {
+  font-family: 'Noto Serif Thai', serif;
+  font-size: 0.95rem;
+  opacity: 0.9;
+  margin-bottom: 0.5rem;
+}
+.menu-header h1 {
+  font-family: 'Noto Serif Thai', serif;
+  font-size: clamp(1.5rem, 4vw, 2rem);
+  font-weight: 900;
+  color: #FFF;
+  text-shadow: 0 2px 10px rgba(0,0,0,0.2);
+}
+.menu-header .sub {
+  font-size: 0.9rem;
+  opacity: 0.85;
+  margin-top: 0.4rem;
+}
+
+/* ── Card grid ── */
+.menu-wrap {
+  position: relative;
+  z-index: 1;
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 2rem 1rem 3rem;
+}
+
+.menu-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1.25rem;
+}
+
+.menu-card {
+  display: block;
+  text-decoration: none;
+  color: inherit;
+  background: #FFF;
+  border-radius: 16px;
+  padding: 1.5rem;
+  box-shadow: 0 4px 16px var(--shadow-warm), 0 0 0 1px rgba(201, 168, 76, 0.1);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  border: 2px solid transparent;
+  min-height: 140px;
+  /* Touch-friendly: พื้นที่กดใหญ่ */
+  -webkit-tap-highlight-color: transparent;
+}
+@media (hover: hover) {
+  .menu-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 28px var(--shadow-warm), 0 0 0 2px var(--saffron);
+  }
+}
+.menu-card:active {
+  transform: scale(0.98);
+}
+
+.menu-card-icon {
+  font-size: 2.2rem;
+  margin-bottom: 0.75rem;
+  line-height: 1;
+}
+.menu-card-title {
+  font-family: 'Noto Serif Thai', serif;
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--maroon-deep);
+  margin-bottom: 0.35rem;
+  line-height: 1.35;
+}
+.menu-card-desc {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  line-height: 1.5;
+}
+.menu-card-arrow {
+  margin-top: 0.75rem;
+  font-size: 0.9rem;
+  color: var(--saffron);
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+/* สี accent แต่ละการ์ด (ขอบบนหรือจุด) */
+.menu-card.one { border-top: 4px solid #C0392B; }
+.menu-card.two { border-top: 4px solid var(--blue-calm); }
+.menu-card.three { border-top: 4px solid var(--green-herb); }
+.menu-card.four { border-top: 4px solid var(--orange-warm); }
+.menu-card.five { border-top: 4px solid #E74C3C; }
+.menu-card.six { border-top: 4px solid var(--purple-soft); }
+.menu-card.seven { border-top: 4px solid #27AE60; }
+.menu-card.eight { border-top: 4px solid #8E44AD; }
+.menu-card.nine { border-top: 4px solid var(--saffron); }
+
+/* ── ปุ่มอ่านทั้งหมด ── */
+.menu-all-wrap {
+  text-align: center;
+  margin-top: 2rem;
+}
+.menu-quiz-wrap { margin-top: 1rem; }
+.menu-all {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 1rem 1.75rem;
+  background: linear-gradient(135deg, var(--maroon), #8B3A1D);
+  color: var(--saffron-glow);
+  text-decoration: none;
+  font-weight: 700;
+  border-radius: 12px;
+  border: 2px solid var(--gold);
+  box-shadow: 0 4px 16px var(--shadow-warm);
+  transition: transform 0.2s, box-shadow 0.2s;
+  -webkit-tap-highlight-color: transparent;
+}
+.menu-all:hover { color: #FFF; }
+.menu-all:active { transform: scale(0.98); }
+@media (hover: hover) {
+  .menu-all:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px var(--shadow-warm);
+  }
+}
+
+/* ── Responsive: มือถือ ── */
+@media (max-width: 600px) {
+  .menu-grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+  .menu-card {
+    padding: 1.35rem;
+    min-height: 120px;
+  }
+  .menu-header { padding: 1.5rem 1rem; }
+}
+</style>
+</head>
+<body>
+
+<header class="menu-header">
+  <div class="dhamma">☸ อโรคยา ปรมา ลาภา ☸</div>
+  <h1>สุขภาพดี สมณะมั่นคง</h1>
+  <p class="sub">เลือกหัวข้อที่ต้องการอ่าน</p>
+</header>
+
+<!-- ลิงก์ไป index.html เป็น relative — เวลา deploy ให้ index.html กับ menu.html อยู่โฟลเดอร์เดียวกัน -->
+<main class="menu-wrap">
+  <div class="menu-grid">
+    <a href="index.html#diseases" class="menu-card one">
+      <div class="menu-card-icon">🔴🟠🟡🟢</div>
+      <h2 class="menu-card-title">ไข้ออกผื่น</h2>
+      <p class="menu-card-desc">แยกโรคผื่น ๔ ชนิด — หัด หัดเยอรมัน อีสุกอีใส ไข้เลือดออก</p>
+      <span class="menu-card-arrow">อ่านต่อ →</span>
+    </a>
+    <a href="index.html#compare" class="menu-card two">
+      <div class="menu-card-icon">📋</div>
+      <h2 class="menu-card-title">ตาราง</h2>
+      <p class="menu-card-desc">เปรียบเทียบอาการ ไข้ ผื่น และความรุนแรงของทั้ง ๔ โรค</p>
+      <span class="menu-card-arrow">อ่านต่อ →</span>
+    </a>
+    <a href="index.html#prevent" class="menu-card three">
+      <div class="menu-card-icon">🛡️</div>
+      <h2 class="menu-card-title">คาถาป้องกัน</h2>
+      <p class="menu-card-desc">วิธีลดความเสี่ยงและป้องกันการติดเชื้อ</p>
+      <span class="menu-card-arrow">อ่านต่อ →</span>
+    </a>
+    <a href="index.html#medicine" class="menu-card four">
+      <div class="menu-card-icon">⚠️💊</div>
+      <h2 class="menu-card-title">ยาอันตราย</h2>
+      <p class="menu-card-desc">ยาที่ห้ามใช้ในโรคผื่นบางชนิด — เพื่อความปลอดภัย</p>
+      <span class="menu-card-arrow">อ่านต่อ →</span>
+    </a>
+    <a href="index.html#warning" class="menu-card five">
+      <div class="menu-card-icon">🚨</div>
+      <h2 class="menu-card-title">สัญญาณวิกฤต</h2>
+      <p class="menu-card-desc">อาการที่ต้องไปพบแพทย์โดยเร็ว</p>
+      <span class="menu-card-arrow">อ่านต่อ →</span>
+    </a>
+    <a href="index.html#vaccine" class="menu-card six">
+      <div class="menu-card-icon">💉</div>
+      <h2 class="menu-card-title">วัคซีน</h2>
+      <p class="menu-card-desc">แนวทางวัคซีน MMR อีสุกอีใส ไข้เลือดออก</p>
+      <span class="menu-card-arrow">อ่านต่อ →</span>
+    </a>
+    <a href="index.html#outbreak" class="menu-card seven">
+      <div class="menu-card-icon">🏥</div>
+      <h2 class="menu-card-title">เมื่อระบาด</h2>
+      <p class="menu-card-desc">แนวทางจัดการเมื่อมีการระบาดในชุมชนหรือวัด</p>
+      <span class="menu-card-arrow">อ่านต่อ →</span>
+    </a>
+    <a href="index.html#monkcare" class="menu-card eight">
+      <div class="menu-card-icon">☸️</div>
+      <h2 class="menu-card-title">ข้อปฏิบัติ</h2>
+      <p class="menu-card-desc">แนวทางสำหรับพระภิกษุและสามเณร</p>
+      <span class="menu-card-arrow">อ่านต่อ →</span>
+    </a>
+    <a href="index.html#faq" class="menu-card nine">
+      <div class="menu-card-icon">❓</div>
+      <h2 class="menu-card-title">คำถาม</h2>
+      <p class="menu-card-desc">คำตอบคำถามเกี่ยวกับโรคและวัคซีน</p>
+      <span class="menu-card-arrow">อ่านต่อ →</span>
+    </a>
+  </div>
+
+  <div class="menu-all-wrap">
+    <a href="index.html" class="menu-all">📖 อ่านทั้งหมดตั้งแต่ต้น</a>
+  </div>
+  <div class="menu-all-wrap menu-quiz-wrap">
+    <a href="quiz.html" class="menu-all">📝 ทำแบบทดสอบหลังเรียนรู้</a>
+  </div>
+</main>
+
+</body>
+</html>
