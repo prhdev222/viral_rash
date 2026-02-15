@@ -725,6 +725,23 @@ body::before {
   line-height: 1.7;
 }
 
+/* รูปในหัวข้อเมื่อระบาด (outbreak cards) — กดดูรูปใหญ่ได้ */
+.outbreak-card-img {
+  width: 100%;
+  height: 140px;
+  object-fit: cover;
+  border-radius: 10px;
+  margin-bottom: 0.8rem;
+  display: block;
+  background: var(--cream);
+  cursor: pointer;
+  transition: opacity 0.2s, box-shadow 0.2s;
+}
+.outbreak-card-img:hover {
+  opacity: 0.92;
+  box-shadow: 0 4px 16px var(--shadow-gold);
+}
+
 /* ── คาถาป้องกัน: หมวดหมู่คลิกเปิด/ปิด ── */
 .prevent-accordion { margin-top: 1.5rem; }
 .prevent-accordion details {
@@ -1949,7 +1966,7 @@ body::before {
   <div style="background:linear-gradient(135deg,#FDF2F2,#FDEDEC);border:2px solid var(--red-alert);border-radius:12px;padding:1.2rem 1.5rem;margin-bottom:2rem;display:flex;align-items:center;gap:1rem;">
     <div style="font-size:2rem;flex-shrink:0;">⚡</div>
     <div style="font-size:0.95rem;color:var(--red-alert);line-height:1.6;">
-      <strong>สำคัญ:</strong> เชื้อไวรัสหัด (Measles) สามารถลอยอยู่ในอากาศได้นานถึง <strong>๒ ชั่วโมง</strong> หลังผู้ป่วยออกจากห้องไปแล้ว จึงต้องระมัดระวังเป็นพิเศษในพื้นที่ปิดอย่างศาลาหรือกุฏิ
+      <strong>หัดและอีสุกอีใส ไม่ใช่แค่ไอใส่กัน:</strong> เชื้อสองโรคนี้ตัวเบามาก สามารถลอยค้างอยู่ในอากาศภายในกุฏิหรือศาลาได้นานถึง <strong>๒ ชั่วโมง</strong> แม้พระที่อาพาธจะเดินออกจากห้องไปแล้วก็ตาม
     </div>
   </div>
 
@@ -1957,6 +1974,7 @@ body::before {
 
     <!-- การแยกกุฏิ -->
     <div class="prevent-card" style="border-left-color:var(--red-alert);">
+      <img class="outbreak-card-img" src="images/1.separate.png" alt="๑ การแยกกุฏิ" loading="lazy">
       <div class="prevent-letter" style="background:var(--red-alert);">๑</div>
       <div class="prevent-title">การแยกกุฏิ (Isolation)</div>
       <div class="prevent-desc">
@@ -1969,6 +1987,7 @@ body::before {
 
     <!-- สิ่งของส่วนตัว -->
     <div class="prevent-card" style="border-left-color:var(--orange-warm);">
+      <img class="outbreak-card-img" src="images/2.thing_isolate.png" alt="๒ ห้ามใช้สิ่งของร่วมกัน" loading="lazy">
       <div class="prevent-letter" style="background:var(--orange-warm);">๒</div>
       <div class="prevent-title">ห้ามใช้สิ่งของร่วมกัน</div>
       <div class="prevent-desc">
@@ -1978,6 +1997,7 @@ body::before {
 
     <!-- สุขอนามัย -->
     <div class="prevent-card" style="border-left-color:var(--blue-calm);">
+      <img class="outbreak-card-img" src="images/3.handwash.png" alt="๓ สุขอนามัยมือ" loading="lazy">
       <div class="prevent-letter" style="background:var(--blue-calm);">๓</div>
       <div class="prevent-title">สุขอนามัยมือ</div>
       <div class="prevent-desc">
@@ -1987,6 +2007,7 @@ body::before {
 
     <!-- การทำความสะอาด -->
     <div class="prevent-card" style="border-left-color:var(--purple-soft);">
+      <img class="outbreak-card-img" src="images/4.clean.png" alt="๔ ทำความสะอาดอย่างถูกวิธี" loading="lazy">
       <div class="prevent-letter" style="background:var(--purple-soft);">๔</div>
       <div class="prevent-title">ทำความสะอาดอย่างถูกวิธี</div>
       <div class="prevent-desc">
@@ -1996,6 +2017,7 @@ body::before {
 
     <!-- หน้ากาก -->
     <div class="prevent-card" style="border-left-color:var(--maroon);">
+      <img class="outbreak-card-img" src="images/5.N95.png" alt="๕ หน้ากาก N95" loading="lazy">
       <div class="prevent-letter" style="background:var(--maroon);">๕</div>
       <div class="prevent-title">หน้ากากอนามัย</div>
       <div class="prevent-desc">
@@ -2005,6 +2027,7 @@ body::before {
 
     <!-- แจ้งสาธารณสุข -->
     <div class="prevent-card" style="border-left-color:var(--green-herb);">
+      <img class="outbreak-card-img" src="images/6.hospital.png" alt="๖ แจ้งสาธารณสุขในพื้นที่" loading="lazy">
       <div class="prevent-letter" style="background:var(--green-herb);">๖</div>
       <div class="prevent-title">แจ้งสาธารณสุขในพื้นที่</div>
       <div class="prevent-desc">
@@ -2363,6 +2386,11 @@ document.querySelectorAll('.card-img-link[data-disease]').forEach(function (btn)
 if (galleryClose) galleryClose.addEventListener('click', closeGallery);
 galleryModal.addEventListener('click', function (e) {
   if (e.target === galleryModal) closeGallery();
+});
+
+// รูปในหัวข้อเมื่อระบาด — กดดูรูปใหญ่ (lightbox)
+document.querySelectorAll('.outbreak-card-img').forEach(function (img) {
+  img.addEventListener('click', function () { openLightbox(this.src, this.alt); });
 });
 
 // Hamburger เมนูมือถือ
