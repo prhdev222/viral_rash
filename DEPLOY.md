@@ -40,12 +40,23 @@
 
 ---
 
-### 3. **Vercel**
+### 3. **Vercel** (แนะนำถ้า repo อยู่บน GitHub แล้ว)
 
-1. ไป [vercel.com](https://vercel.com) → Sign up (ใช้ GitHub ได้)
-2. **Add New** → **Project** → อัปโหลดโฟลเดอร์หรือเชื่อม Git
-3. Root Directory: เลือกโฟลเดอร์ที่มี `index.html`, `menu.html`
-4. Deploy แล้วจะได้ URL เช่น `project-name.vercel.app`
+#### Deploy จาก GitHub ไป Vercel
+
+1. ไป **[vercel.com](https://vercel.com)** → Sign in with **GitHub**
+2. กด **Add New…** → **Project**
+3. เลือก repo **prhdev222/viral_rash** (หรือ Import Git Repository แล้วใส่ `https://github.com/prhdev222/viral_rash`)
+4. ตั้งค่าโปรเจกต์:
+   - **Framework Preset:** Other (หรือ Vite/Static ตามที่ Vercel แนะนำ)
+   - **Root Directory:** ว่างไว้ (ใช้ root ของ repo)
+   - **Build Command:** ว่างได้ (เป็น static HTML ไม่ต้อง build)
+   - **Output Directory:** ว่างได้
+5. กด **Deploy**
+6. รอ 1–2 นาที จะได้ URL เช่น **`viral-rash.vercel.app`** หรือ **`viral-rash-xxx.vercel.app`**
+7. เปิดเว็บ: หน้าแรก = `https://your-project.vercel.app/` หรือ `/index.html` เมนู = `/menu.html` แบบทดสอบ = `/quiz.html`
+
+**อัปเดตโค้ด:** แค่ push ขึ้น GitHub (branch ที่เชื่อมกับ Vercel) Vercel จะ deploy ใหม่ให้อัตโนมัติ (Production Deployments)
 
 ---
 
