@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>สุขภาพดี สมณะมั่นคง — คู่มือโรคติดเชื้อสำหรับพระภิกษุและสามเณร</title>
+<title>พระ-เณร สุขภาพดี — คู่มือโรคติดเชื้อสำหรับพระภิกษุและสามเณร</title>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Thai:wght@300;400;500;600;700;800;900&family=Noto+Serif+Thai:wght@400;600;700;900&family=Sarabun:wght@300;400;600;700&display=swap" rel="stylesheet">
 <style>
 :root {
@@ -210,8 +210,19 @@ body::before {
   color: var(--saffron-light);
   font-size: 1.1rem;
   text-decoration: none;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  line-height: 1.3;
 }
 .nav-logo:hover { color: #FFF; }
+.nav-logo-sub {
+  font-size: 0.65rem;
+  font-weight: 500;
+  opacity: 0.85;
+  margin-top: 0.15rem;
+  letter-spacing: 0.02em;
+}
 
 /* Hamburger — โชว์เฉพาะมือถือ */
 /* เมนูหลัก — แสดงบนแถบเสมอ ลิงก์ไป menu.html */
@@ -440,6 +451,115 @@ body::before {
   font-weight: 300;
 }
 
+.card-img-links { margin-top: 0.5rem; }
+.card-img-link {
+  display: inline-block;
+  font-size: 0.75rem;
+  color: rgba(255,255,255,0.95);
+  text-decoration: none;
+  padding: 0.25rem 0.6rem;
+  border: 1px solid rgba(255,255,255,0.5);
+  border-radius: 6px;
+  transition: background 0.2s, color 0.2s;
+  cursor: pointer;
+  background: none;
+  font-family: inherit;
+}
+.card-img-link:hover { background: rgba(255,255,255,0.2); color: #FFF; }
+
+/* โมดัลแกลเลอรีรูป */
+.img-gallery-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.85);
+  z-index: 9999;
+  overflow-y: auto;
+  padding: 2rem 1rem 4rem;
+  box-sizing: border-box;
+}
+.img-gallery-overlay.open { display: block; }
+.img-gallery-overlay .gallery-close {
+  position: fixed;
+  top: 1rem;
+  right: 1rem;
+  width: 48px;
+  height: 48px;
+  border: none;
+  background: rgba(255,255,255,0.15);
+  color: #FFF;
+  font-size: 1.5rem;
+  border-radius: 50%;
+  cursor: pointer;
+  z-index: 10001;
+  line-height: 1;
+}
+.img-gallery-overlay .gallery-close:hover { background: rgba(255,255,255,0.3); }
+.img-gallery-overlay .gallery-title {
+  text-align: center;
+  color: #FFF;
+  font-family: 'Noto Serif Thai', serif;
+  font-size: 1.25rem;
+  margin-bottom: 1.5rem;
+  padding-top: 0.5rem;
+}
+.img-gallery-overlay .gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 280px), 1fr));
+  gap: 1rem;
+  max-width: 900px;
+  margin: 0 auto;
+}
+.img-gallery-overlay .gallery-grid img {
+  width: 100%;
+  height: auto;
+  border-radius: 12px;
+  background: #222;
+  cursor: pointer;
+  transition: opacity 0.2s, transform 0.2s;
+}
+.img-gallery-overlay .gallery-grid img:hover {
+  opacity: 0.9;
+  transform: scale(1.02);
+}
+.img-gallery-overlay .gallery-grid img.load-fail { display: none; }
+
+/* เลเยอร์ขยายรูปเมื่อคลิก */
+.lightbox-enlarge {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.92);
+  z-index: 10002;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem;
+  box-sizing: border-box;
+}
+.lightbox-enlarge.open { display: flex; }
+.lightbox-enlarge img {
+  max-width: 95%;
+  max-height: 90vh;
+  object-fit: contain;
+  border-radius: 12px;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.5);
+}
+.lightbox-enlarge .lightbox-close {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  width: 48px;
+  height: 48px;
+  border: none;
+  background: rgba(255,255,255,0.2);
+  color: #FFF;
+  font-size: 1.5rem;
+  border-radius: 50%;
+  cursor: pointer;
+  line-height: 1;
+}
+.lightbox-enlarge .lightbox-close:hover { background: rgba(255,255,255,0.35); }
+
 .card-body {
   padding: 1.5rem 1.8rem 1.8rem;
 }
@@ -520,6 +640,7 @@ body::before {
 .compare-table th.rubella-h { background: #7D3C98; }
 .compare-table th.chickenpox-h { background: #D35400; }
 .compare-table th.dengue-h { background: #2C6E8A; }
+.compare-table th.scabies-h { background: #8B6914; }
 
 .compare-table td {
   padding: 0.8rem 1rem;
@@ -601,6 +722,46 @@ body::before {
   color: var(--text-muted);
   line-height: 1.7;
 }
+
+/* ── คาถาป้องกัน: หมวดหมู่คลิกเปิด/ปิด ── */
+.prevent-accordion { margin-top: 1.5rem; }
+.prevent-accordion details {
+  background: #FFF;
+  border-radius: 14px;
+  margin-bottom: 1rem;
+  box-shadow: 0 3px 18px var(--shadow-warm);
+  border: 2px solid rgba(201, 168, 76, 0.2);
+  overflow: hidden;
+}
+.prevent-accordion details[open] { border-color: var(--gold); }
+.prevent-accordion summary {
+  font-family: 'Noto Serif Thai', serif;
+  font-weight: 700;
+  font-size: 1.1rem;
+  padding: 1.2rem 1.5rem;
+  cursor: pointer;
+  list-style: none;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  color: var(--maroon-deep);
+  background: linear-gradient(135deg, #FFFBF5, #FFF8EC);
+  transition: background 0.2s;
+}
+.prevent-accordion summary::-webkit-details-marker { display: none; }
+.prevent-accordion summary::after {
+  content: '▼';
+  margin-left: auto;
+  font-size: 0.75rem;
+  color: var(--saffron);
+  transition: transform 0.25s;
+}
+.prevent-accordion details[open] summary::after { transform: rotate(-180deg); }
+.prevent-accordion summary:hover { background: #FFF3DB; }
+.prevent-accordion .accordion-body { padding: 1.5rem; border-top: 1px solid rgba(107,29,29,0.08); }
+.prevent-accordion details.summary-dengue summary { border-left: 4px solid var(--green-herb); }
+.prevent-accordion details.summary-viral summary { border-left: 4px solid var(--maroon); }
+.prevent-accordion details.summary-scabies summary { border-left: 4px solid #8B6914; }
 
 /* ── Medicine Warning ── */
 .med-section {
@@ -1043,12 +1204,12 @@ body::before {
 <section class="hero">
   <div class="hero-dhamma">☸ อโรคยา ปรมา ลาภา ☸</div>
   <h1 class="hero-title">
-    สุขภาพดี สมณะมั่นคง
-    <span>คู่มือโรคติดเชื้อ ๔ โรค</span>
+    พระ-เณร สุขภาพดี
+    <span>โรคออกผื่นที่ติดต่อง่าย</span>
   </h1>
   <p class="hero-subtitle">
-    ความรู้เรื่องหัด หัดเยอรมัน อีสุกอีใส และไข้เลือดออก<br>
-    สำหรับพระภิกษุและสามเณร — เพื่อดูแลสุขภาพกายให้มั่นคงดุจดั่งธรรม
+    ความรู้เรื่องหัด หัดเยอรมัน อีสุกอีใส ไข้เลือดออก และโรคหิด<br>
+    สำหรับพระภิกษุและสามเณร — เมตตาธรรมในการดูแลกัน
   </p>
   <div class="hero-lotus">🪷</div>
   <a href="#content-start" class="hero-scroll">▼ เลื่อนลงเพื่ออ่าน</a>
@@ -1060,13 +1221,14 @@ body::before {
   ═══════════════════════════════════════════════════════ -->
 <nav class="nav-sticky" id="main-nav">
   <div class="nav-inner">
-    <a href="menu.html" class="nav-logo">☸ สุขภาพสงฆ์</a>
+    <a href="menu.html" class="nav-logo"><span>☸ สุขภาพสงฆ์</span><span class="nav-logo-sub">โดย โรงพยาบาลสงฆ์</span></a>
     <a href="menu.html" class="nav-main-link">📋 เมนูหลัก</a>
     <button type="button" class="nav-toggle" id="nav-toggle" aria-label="เปิดเมนู">
       <span></span><span></span><span></span>
     </button>
     <div class="nav-menu">
       <a href="#diseases" class="nav-link">ไข้ออกผื่น</a>
+      <a href="#scabies" class="nav-link">โรคหิด</a>
       <a href="#compare" class="nav-link">ตาราง</a>
       <a href="#prevent" class="nav-link">คาถาป้องกัน</a>
       <a href="#medicine" class="nav-link">ยาอันตราย</a>
@@ -1081,12 +1243,12 @@ body::before {
 
 <div id="content-start"></div>
 
-<!-- ═══════════ ๑. โรค ๔ ชนิด ═══════════ -->
+<!-- ═══════════ ๑. โรคออกผื่นที่ติดต่อง่าย ═══════════ -->
 <section class="section section-bg-1 fade-in" id="diseases">
   <div class="section-header">
     <div class="section-number">บทที่ ๑</div>
-    <h2 class="section-title">๔ พี่น้องส่องกระจก</h2>
-    <p class="section-subtitle">แยกโรคผื่นออกผิวหนังให้เป็น — อาการต่างกันอย่างไร</p>
+    <h2 class="section-title">โรคออกผื่นที่ติดต่อง่าย</h2>
+    <p class="section-subtitle">สำหรับพระภิกษุและสามเณรที่อยู่ร่วมกันในวัด — รู้ทันโรค แยกอาการได้ เน้นเมตตาธรรมในการดูแลกัน</p>
   </div>
 
   <div class="disease-grid">
@@ -1097,6 +1259,9 @@ body::before {
         <div class="card-emoji">🔴</div>
         <div class="card-name-th">หัดแท้ (Measles)</div>
         <div class="card-name-en">เชื้อไวรัส Measles Virus — แพร่ทางอากาศ</div>
+        <div class="card-img-links">
+          <button type="button" class="card-img-link" data-disease="measles" title="ดูรูปผื่นหัดทั้งหมด">🖼️ ดูรูป</button>
+        </div>
       </div>
       <div class="card-body">
         <div class="symptom-group">
@@ -1134,6 +1299,9 @@ body::before {
         <div class="card-emoji">🟣</div>
         <div class="card-name-th">หัดเยอรมัน (Rubella)</div>
         <div class="card-name-en">เชื้อไวรัส Rubella Virus — แพร่ทางละอองฝอย</div>
+        <div class="card-img-links">
+          <button type="button" class="card-img-link" data-disease="rubella" title="ดูรูปผื่นหัดเยอรมันทั้งหมด">🖼️ ดูรูป</button>
+        </div>
       </div>
       <div class="card-body">
         <div class="symptom-group">
@@ -1171,6 +1339,9 @@ body::before {
         <div class="card-emoji">🟠</div>
         <div class="card-name-th">อีสุกอีใส (Chickenpox)</div>
         <div class="card-name-en">เชื้อไวรัส Varicella-Zoster — แพร่ทางอากาศและสัมผัส</div>
+        <div class="card-img-links">
+          <button type="button" class="card-img-link" data-disease="chickenpox" title="ดูรูปผื่นอีสุกอีใสทั้งหมด">🖼️ ดูรูป</button>
+        </div>
       </div>
       <div class="card-body">
         <div class="symptom-group">
@@ -1208,6 +1379,9 @@ body::before {
         <div class="card-emoji">🔵</div>
         <div class="card-name-th">ไข้เลือดออก (Dengue)</div>
         <div class="card-name-en">เชื้อไวรัส Dengue — ยุงลาย Aedes aegypti เป็นพาหะ</div>
+        <div class="card-img-links">
+          <button type="button" class="card-img-link" data-disease="dengue" title="ดูรูปไข้เลือดออกทั้งหมด">🖼️ ดูรูป</button>
+        </div>
       </div>
       <div class="card-body">
         <div class="symptom-group">
@@ -1239,6 +1413,70 @@ body::before {
       </div>
     </div>
 
+    <!-- โรคหิด (ลิงก์ไปรายละเอียดด้านล่าง) -->
+    <a href="#scabies" class="disease-card" style="text-decoration:none;color:inherit;display:block;">
+      <div class="card-banner" style="background:linear-gradient(135deg,#8B6914,#B8860B);color:#fff;">
+        <div class="card-emoji">🪲</div>
+        <div class="card-name-th">โรคหิด (Scabies)</div>
+        <div class="card-name-en">ตัวไรหิด — คันกลางคืน ตุ่มง่ามมือ รักษาพร้อมกันทั้งกุฏิ</div>
+        <div class="card-img-links" onclick="event.stopPropagation();">
+          <button type="button" class="card-img-link" data-disease="scabies" title="ดูรูปโรคหิดทั้งหมด" onclick="event.stopPropagation();">🖼️ ดูรูป</button>
+        </div>
+      </div>
+      <div class="card-body" style="text-align:center;">
+        <p style="margin:0;font-size:0.95rem;color:var(--text-muted);">คลิกอ่านรายละเอียด: รู้ทันโรคหิด สกัดการระบาดในวัด</p>
+      </div>
+    </a>
+
+  </div>
+
+  <!-- ── โรคหิด (Scabies) ── -->
+  <div class="monk-tips" id="scabies" style="margin-top:2.5rem;border-left:4px solid #8B6914;scroll-margin-top:5rem;">
+    <div class="monk-tips-title" style="color:var(--maroon-deep);">🪲 รู้ทันโรคหิด สกัดการระบาดในวัด</div>
+    <p style="margin-bottom:1rem;font-size:0.95rem;color:var(--text-muted);">สำหรับผู้อยู่ร่วมกันในกุฏิหรือพื้นที่จำกัด — เน้นเมตตาธรรม</p>
+
+    <div class="prevent-card" style="border-left-color:#8B6914;margin-bottom:1rem;">
+      <div class="prevent-letter" style="background:#8B6914;">๑</div>
+      <div class="prevent-title">โรคหิด คืออะไร? (รู้จักศัตรูตัวจิ๋ว)</div>
+      <div class="prevent-desc">
+        <strong>หิด (Scabies)</strong> ไม่ใช่โรคลี้ลับ แต่เกิดจาก <strong>ตัวไรหิด</strong> ขนาดเล็กมากจนมองไม่เห็นด้วยตาเปล่า มันขุดอุโมงค์อยู่ใต้ผิวหนังเพื่อวางไข่และขับถ่าย<br><br>
+        <strong>อาการสำคัญ:</strong> คันมากเป็นพิเศษ <strong>ในตอนกลางคืน</strong> เพราะตัวไรเคลื่อนที่คึกคักช่วงนี้ มักเห็นเป็นตุ่มน้ำใสหรือตุ่มแดงตาม <strong>ง่ามมือ ง่ามเท้า รักแร้ และอวัยวะเพศ</strong>
+      </div>
+    </div>
+
+    <div class="prevent-card" style="border-left-color:#8B6914;margin-bottom:1rem;">
+      <div class="prevent-letter" style="background:#8B6914;">๒</div>
+      <div class="prevent-title">ติดต่อกันได้อย่างไร? (ทางผ่านของโรค)</div>
+      <div class="prevent-desc">
+        <strong>สัมผัสใกล้ชิด:</strong> นั่งใกล้กัน สัมผัสผิวหนังโดยตรงนาน (เรียนหนังสือ ทำวัตร)<br><br>
+        <strong>ของใช้ร่วมกัน — จุดสำคัญในวัด:</strong> ใช้ผ้าเช็ดตัวร่วมกัน นอนบนที่นอนหรืออาสนะเดียวกัน ใช้สบู่ก้อนเดียวกัน หรือใช้จีวรที่วางปนกัน
+      </div>
+    </div>
+
+    <div class="prevent-card" style="border-left-color:#8B6914;margin-bottom:1rem;">
+      <div class="prevent-letter" style="background:#8B6914;">๓</div>
+      <div class="prevent-title">วิธีการรักษา (ต้องทำพร้อมกัน)</div>
+      <div class="prevent-desc">
+        รักษาหิดให้หายขาดต้องได้ความร่วมมือจาก<strong>ทุกรูปในกุฏิ</strong>:<br>
+        • <strong>ทายาฆ่าหิด</strong> (Permethrin หรือ Benzyl Benzoate) ทาตั้งแต่คอถึงปลายเท้า เน้นซอกนิ้วและข้อพับ ทาทิ้งไว้ข้ามคืน (8–12 ชม.) แล้วล้างออก<br>
+        • <strong>รักษาพร้อมกัน:</strong> ถ้ามีรูปใดรูปหนึ่งเป็น — ทุกรูปในกุฏิหรือที่อยู่ใกล้ชิดต้องทายาพร้อมกัน แม้ยังไม่มีอาการ เพื่อตัดวงจร<br>
+        • <strong>ยาแก้คัน:</strong> หลังทายาอาจยังคันต่อได้ 1–2 สัปดาห์ (ปฏิกิริยาของร่างกาย) ใช้ยาแก้แพ้บรรเทาได้
+      </div>
+    </div>
+
+    <div class="prevent-card" style="border-left-color:#27AE60;margin-bottom:1rem;">
+      <div class="prevent-letter" style="background:#27AE60;">๔</div>
+      <div class="prevent-title">วิธีป้องกันและจัดการสิ่งแวดล้อม — คาถา 3 ซ.</div>
+      <div class="prevent-desc">
+        <strong>ซัก:</strong> จีวร สบง ผ้าปูที่นอน ปลอกหมอน — ซักด้วย<strong>น้ำร้อน 60°C ขึ้นไป</strong> เพื่อฆ่าตัวไรและไข่<br>
+        <strong>ซุก:</strong> ของที่ซักไม่ได้ (หมอนอิง อาสนะหนา) ใส่ถุงพลาสติกปิดสนิท <strong>เก็บทิ้งไว้ 7 วัน</strong> ตัวไรไม่มีอาหารจะตาย<br>
+        <strong>ส่อง:</strong> หมั่นสังเกตกัน หากเห็นใครเกาผิดปกติหรือมีตุ่มตามมือ แจ้งพระอุปัชฌาย์หรือเจ้าอาวาสเพื่อพาไปพบแพทย์ทันที
+      </div>
+    </div>
+
+    <div style="background:linear-gradient(135deg,#FFF8E7,#FFF3DB);border:2px solid var(--gold);border-radius:12px;padding:1.2rem 1.5rem;text-align:center;font-weight:700;color:var(--maroon);">
+      ☸ คันกลางคืน ตุ่มใสตามง่ามมือ รักษาพร้อมกันทั้งกุฏิ ซักน้ำร้อนฆ่าเชื้อ ☸
+    </div>
   </div>
 </section>
 
@@ -1248,7 +1486,7 @@ body::before {
 <section class="section section-bg-2 fade-in" id="compare">
   <div class="section-header">
     <div class="section-icon">📊</div>
-    <h2 class="section-title">ตารางเปรียบเทียบ ๔ โรค</h2>
+    <h2 class="section-title">ตารางเปรียบเทียบ ๕ โรค</h2>
     <p class="section-subtitle">ดูข้อแตกต่างของแต่ละโรคในมุมมองเดียว</p>
   </div>
 
@@ -1261,6 +1499,7 @@ body::before {
           <th class="rubella-h">🟣 หัดเยอรมัน</th>
           <th class="chickenpox-h">🟠 อีสุกอีใส</th>
           <th class="dengue-h">🔵 ไข้เลือดออก</th>
+          <th class="scabies-h">🪲 โรคหิด</th>
         </tr>
       </thead>
       <tbody>
@@ -1270,6 +1509,7 @@ body::before {
           <td>Rubella virus</td>
           <td>Varicella-Zoster</td>
           <td>Dengue virus (ยุงลาย)</td>
+          <td>ตัวไรหิด (Scabies)</td>
         </tr>
         <tr>
           <td>ระดับไข้</td>
@@ -1277,6 +1517,7 @@ body::before {
           <td>ต่ำ</td>
           <td>ต่ำ-ปานกลาง</td>
           <td>สูงปรี๊ด 39–40°C</td>
+          <td>ไม่มี/ไม่เด่น</td>
         </tr>
         <tr>
           <td>ลักษณะผื่น</td>
@@ -1284,6 +1525,7 @@ body::before {
           <td>จุดชมพูจาง หาย 3 วัน</td>
           <td>ตุ่มน้ำใส หลายระยะ</td>
           <td>จุดเลือดออก กดไม่จาง</td>
+          <td>ตุ่มน้ำใส/ตุ่มแดง ง่ามมือ ง่ามเท้า รักแร้</td>
         </tr>
         <tr>
           <td>ไอ/น้ำมูก</td>
@@ -1291,6 +1533,7 @@ body::before {
           <td>อาจมีเล็กน้อย</td>
           <td>ไม่เด่น</td>
           <td>ไม่มี ❌</td>
+          <td>ไม่มี</td>
         </tr>
         <tr>
           <td>อาการเด่น</td>
@@ -1298,6 +1541,7 @@ body::before {
           <td>ต่อมน้ำเหลืองโต</td>
           <td>คันมาก</td>
           <td>ปวดกระบอกตา + ปวดกระดูก</td>
+          <td>คันมากกลางคืน</td>
         </tr>
         <tr>
           <td>ฟักตัว</td>
@@ -1305,6 +1549,7 @@ body::before {
           <td>14–21 วัน</td>
           <td>14–16 วัน</td>
           <td>4–10 วัน</td>
+          <td>2–6 สัปดาห์ (ครั้งแรก)</td>
         </tr>
         <tr>
           <td>การติดต่อ</td>
@@ -1312,6 +1557,7 @@ body::before {
           <td>ละอองฝอย</td>
           <td>อากาศ+สัมผัส</td>
           <td>ยุงลายกัด</td>
+          <td>สัมผัสใกล้ชิด ของใช้ร่วมกัน</td>
         </tr>
         <tr>
           <td>วัคซีน</td>
@@ -1319,6 +1565,7 @@ body::before {
           <td>MMR ✅</td>
           <td>Varicella ✅</td>
           <td>Qdenga ✅</td>
+          <td>ไม่มี</td>
         </tr>
         <tr>
           <td>🔒 ระยะแยกตัว</td>
@@ -1326,6 +1573,7 @@ body::before {
           <td style="color:#7D3C98;font-weight:600;">7 วันหลังผื่นขึ้น</td>
           <td style="color:#D35400;font-weight:600;">จนตุ่มสุดท้ายตกสะเก็ด (~5–7 วัน)</td>
           <td style="color:#2C6E8A;font-weight:600;">ใช้มุ้งกันยุง ตลอดช่วงมีไข้</td>
+          <td style="color:#8B6914;font-weight:600;">รักษาพร้อมกันทั้งกุฏิ ซักน้ำร้อน คาถา 3 ซ.</td>
         </tr>
         <tr>
           <td>เกณฑ์จำ</td>
@@ -1333,6 +1581,7 @@ body::before {
           <td>"แยกนานกว่าหัด" เพื่อปกป้องหญิงครรภ์</td>
           <td>"ดูอาการ" — ตุ่มแห้งหมด</td>
           <td>ไม่ติดคนสู่คน — กันยุงเป็นหลัก</td>
+          <td>คันกลางคืน ตุ่มง่ามมือ รักษาพร้อมกัน ซักน้ำร้อน</td>
         </tr>
       </tbody>
     </table>
@@ -1341,176 +1590,137 @@ body::before {
 
 <hr class="section-divider">
 
-<!-- ═══════════ ๒. การป้องกันโรค (รวม ๕ป.๑ข. + แยกตัว + ฉีด-ห่าง-ปิด-เปิด) ═══════════ -->
+<!-- ═══════════ ๒. การป้องกันโรค (๕ป.๑ข. / ฉีด-ห่าง-ปิด-เปิด / ซัก-ซุก-ส่อง) ═══════════ -->
 <section class="section section-bg-3 fade-in" id="prevent">
   <div class="section-header">
     <div class="section-number">บทที่ ๒</div>
     <h2 class="section-title">การป้องกันโรค</h2>
-    <p class="section-subtitle">๕ ป. ๑ ข. ปราบยุงลาย / ระยะเวลาแยกตัว / คาถา "ฉีด-ห่าง-ปิด-เปิด"</p>
+    <p class="section-subtitle">๕ ป. ๑ ข. ปราบยุงลาย / คาถา "ฉีด-ห่าง-ปิด-เปิด" / คาถา "ซัก / ซุก / ส่อง"</p>
   </div>
 
-  <!-- ─── หมวด ก: ๕ ป. ๑ ข. ─── -->
-  <div style="margin-bottom:3rem;">
-    <div style="display:inline-flex;align-items:center;gap:0.6rem;background:var(--green-herb);color:#FFF;padding:0.5rem 1.2rem;border-radius:20px;font-family:'Noto Serif Thai',serif;font-weight:700;font-size:1rem;margin-bottom:1.2rem;">
-      <span>🦟</span> ๕ ป. ๑ ข. — ปราบยุงลายสไตล์วัดป่า
-    </div>
-    <p style="color:var(--text-muted);font-size:0.92rem;margin-bottom:1.2rem;">มาตรการป้องกันไข้เลือดออกและโรคที่มียุงลายเป็นพาหะ</p>
-    <div class="prevent-grid">
-    <div class="prevent-card">
-      <div class="prevent-letter">ป</div>
-      <div class="prevent-title">ปิด</div>
-      <div class="prevent-desc">ปิดฝาภาชนะขังน้ำให้มิดชิด ไม่ว่าจะเป็นโอ่ง ถังน้ำ หรือตุ่มน้ำ ยุงลายวางไข่ได้แม้ในน้ำนิ่งปริมาณน้อย</div>
-    </div>
-    <div class="prevent-card">
-      <div class="prevent-letter">ป</div>
-      <div class="prevent-title">เปลี่ยน</div>
-      <div class="prevent-desc">เปลี่ยนน้ำในแจกันดอกไม้บูชาพระ กระถางต้นไม้รองน้ำ ทุก 7 วัน เพื่อตัดวงจรลูกน้ำยุงลาย</div>
-    </div>
-    <div class="prevent-card">
-      <div class="prevent-letter">ป</div>
-      <div class="prevent-title">ปล่อย</div>
-      <div class="prevent-desc">ปล่อยปลากินลูกน้ำ (เช่น ปลาหางนกยูง) ในอ่างบัวหรืออ่างน้ำในบริเวณวัด ช่วยกำจัดลูกน้ำยุงตามธรรมชาติ</div>
-    </div>
-    <div class="prevent-card">
-      <div class="prevent-letter">ป</div>
-      <div class="prevent-title">ปรับปรุง</div>
-      <div class="prevent-desc">ปรับปรุงสิ่งแวดล้อมให้โปร่งโล่ง ตัดกิ่งไม้ให้แสงแดดส่องถึง กำจัดขยะ วัสดุเหลือใช้ที่อาจกักน้ำ เก็บยางรถเก่า กะลามะพร้าว</div>
-    </div>
-    <div class="prevent-card">
-      <div class="prevent-letter">ป</div>
-      <div class="prevent-title">ปฏิบัติ</div>
-      <div class="prevent-desc">ลงมือทำเป็นประจำทุกสัปดาห์ ไม่ใช่ทำครั้งเดียวแล้วเลิก อาจกำหนดเป็น "วันปราบยุง" ของวัดเดือนละ 2 ครั้ง</div>
-    </div>
-    <div class="prevent-card">
-      <div class="prevent-letter">ข</div>
-      <div class="prevent-title">ขัด (สำคัญมาก!)</div>
-      <div class="prevent-desc">ขัดภาชนะให้สะอาดเพื่อกำจัดไข่ยุงลายที่ติดแน่นตามขอบ เพราะไข่ยุงลายทนแล้งได้นานหลายเดือน แค่เปลี่ยนน้ำอย่างเดียวไม่พอ ต้องขัดด้วย!</div>
-    </div>
-    </div><!-- end prevent-grid -->
-  </div><!-- end ๕ป.๑ข. -->
+  <div class="prevent-accordion">
+    <p style="color:var(--text-muted);font-size:0.95rem;margin-bottom:1rem;">คลิกที่หัวข้อเพื่อเปิดดูเนื้อหา</p>
 
-  <hr class="section-divider" style="margin:2.5rem auto;">
-
-  <!-- ─── หมวด ข: คาถาป้องกันภัย ── -->
-  <div style="background:linear-gradient(135deg,var(--maroon-deep),var(--maroon));border-radius:16px;padding:2.5rem;color:#FFF;position:relative;overflow:hidden;">
-    <div style="position:absolute;top:0;right:0;width:200px;height:200px;background:radial-gradient(circle,rgba(201,168,76,0.15),transparent);border-radius:50%;"></div>
-    <div style="position:relative;z-index:1;">
-      <div style="text-align:center;margin-bottom:2rem;">
-        <div style="font-size:2rem;margin-bottom:0.5rem;">☸</div>
-        <div style="font-family:'Noto Serif Thai',serif;font-size:clamp(1.4rem,3vw,1.8rem);font-weight:900;color:var(--saffron-light);">คาถาป้องกันภัย ๔ ประการ</div>
-        <div style="font-size:2rem;letter-spacing:0.5rem;color:var(--saffron-glow);font-family:'Noto Serif Thai',serif;font-weight:900;margin-top:0.5rem;">"ฉีด — ห่าง — ปิด — เปิด"</div>
-        <div style="color:var(--saffron-glow);opacity:0.7;font-size:0.9rem;margin-top:0.3rem;">หลักปฏิบัติง่าย ๆ ในกิจวัตรประจำวัน</div>
+    <!-- ๑ คาถาป้องกันไข้เลือดออก -->
+    <details class="summary-dengue">
+      <summary><span>🦟</span> คาถาป้องกันไข้เลือดออก</summary>
+      <div class="accordion-body">
+        <p style="color:var(--text-muted);font-size:0.92rem;margin-bottom:1.2rem;">๕ ป. ๑ ข. — ปราบยุงลาย มาตรการป้องกันไข้เลือดออกและโรคที่มียุงลายเป็นพาหะ</p>
+        <div class="prevent-grid">
+          <div class="prevent-card">
+            <div class="prevent-letter">ป</div>
+            <div class="prevent-title">ปิด</div>
+            <div class="prevent-desc">ปิดฝาภาชนะขังน้ำให้มิดชิด ไม่ว่าจะเป็นโอ่ง ถังน้ำ หรือตุ่มน้ำ ยุงลายวางไข่ได้แม้ในน้ำนิ่งปริมาณน้อย</div>
+          </div>
+          <div class="prevent-card">
+            <div class="prevent-letter">ป</div>
+            <div class="prevent-title">เปลี่ยน</div>
+            <div class="prevent-desc">เปลี่ยนน้ำในแจกันดอกไม้บูชาพระ กระถางต้นไม้รองน้ำ ทุก 7 วัน เพื่อตัดวงจรลูกน้ำยุงลาย</div>
+          </div>
+          <div class="prevent-card">
+            <div class="prevent-letter">ป</div>
+            <div class="prevent-title">ปล่อย</div>
+            <div class="prevent-desc">ปล่อยปลากินลูกน้ำ (เช่น ปลาหางนกยูง) ในอ่างบัวหรืออ่างน้ำในบริเวณวัด ช่วยกำจัดลูกน้ำยุงตามธรรมชาติ</div>
+          </div>
+          <div class="prevent-card">
+            <div class="prevent-letter">ป</div>
+            <div class="prevent-title">ปรับปรุง</div>
+            <div class="prevent-desc">ปรับปรุงสิ่งแวดล้อมให้โปร่งโล่ง ตัดกิ่งไม้ให้แสงแดดส่องถึง กำจัดขยะ วัสดุเหลือใช้ที่อาจกักน้ำ เก็บยางรถเก่า กะลามะพร้าว</div>
+          </div>
+          <div class="prevent-card">
+            <div class="prevent-letter">ป</div>
+            <div class="prevent-title">ปฏิบัติ</div>
+            <div class="prevent-desc">ลงมือทำเป็นประจำทุกสัปดาห์ ไม่ใช่ทำครั้งเดียวแล้วเลิก อาจกำหนดเป็น "วันปราบยุง" ของวัดเดือนละ 2 ครั้ง</div>
+          </div>
+          <div class="prevent-card">
+            <div class="prevent-letter">ข</div>
+            <div class="prevent-title">ขัด (สำคัญมาก!)</div>
+            <div class="prevent-desc">ขัดภาชนะให้สะอาดเพื่อกำจัดไข่ยุงลายที่ติดแน่นตามขอบ เพราะไข่ยุงลายทนแล้งได้นานหลายเดือน แค่เปลี่ยนน้ำอย่างเดียวไม่พอ ต้องขัดด้วย!</div>
+          </div>
+        </div>
       </div>
+    </details>
 
-      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,220px),1fr));gap:1.2rem;">
-
-        <div style="background:rgba(255,255,255,0.1);border:1px solid rgba(201,168,76,0.3);border-radius:12px;padding:1.5rem;backdrop-filter:blur(4px);">
-          <div style="font-size:2rem;margin-bottom:0.5rem;">💉</div>
-          <div style="font-family:'Noto Serif Thai',serif;font-size:1.2rem;font-weight:900;color:var(--saffron-light);margin-bottom:0.4rem;">ฉีด (วัคซีน)</div>
-          <div style="font-size:0.9rem;line-height:1.7;color:var(--saffron-glow);opacity:0.9;">เกราะคุ้มกันที่มั่นคงที่สุด ฉีดวัคซีน MMR และอีสุกอีใสให้ครบตามกำหนด</div>
+    <!-- ๒ คาถาป้องกัน หัด หัดเยอรมัน อีสุกอีใส -->
+    <details class="summary-viral">
+      <summary><span>🔴🟣🟠</span> คาถาป้องกัน หัด หัดเยอรมัน อีสุกอีใส</summary>
+      <div class="accordion-body">
+        <div style="background:linear-gradient(135deg,var(--maroon-deep),var(--maroon));border-radius:14px;padding:2rem;color:#FFF;margin-bottom:2rem;">
+          <div style="text-align:center;margin-bottom:1.5rem;">
+            <div style="font-family:'Noto Serif Thai',serif;font-size:1.2rem;font-weight:900;color:var(--saffron-light);">คาถาป้องกันภัย ๔ ประการ</div>
+            <div style="font-size:1.5rem;letter-spacing:0.3rem;color:var(--saffron-glow);font-family:'Noto Serif Thai',serif;font-weight:900;margin-top:0.5rem;">"ฉีด — ห่าง — ปิด — เปิด"</div>
+          </div>
+          <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,200px),1fr));gap:1rem;">
+            <div style="background:rgba(255,255,255,0.1);border-radius:10px;padding:1.2rem;">
+              <div style="font-size:1.5rem;">💉</div>
+              <div style="font-weight:700;color:var(--saffron-light);">ฉีด (วัคซีน)</div>
+              <div style="font-size:0.85rem;color:var(--saffron-glow);">วัคซีน MMR และอีสุกอีใสให้ครบ</div>
+            </div>
+            <div style="background:rgba(255,255,255,0.1);border-radius:10px;padding:1.2rem;">
+              <div style="font-size:1.5rem;">↔️</div>
+              <div style="font-weight:700;color:var(--saffron-light);">ห่าง (ระยะ)</div>
+              <div style="font-size:0.85rem;color:var(--saffron-glow);">แยกกุฏิทันที หลีกเลี่ยงที่แออัด</div>
+            </div>
+            <div style="background:rgba(255,255,255,0.1);border-radius:10px;padding:1.2rem;">
+              <div style="font-size:1.5rem;">😷</div>
+              <div style="font-weight:700;color:var(--saffron-light);">ปิด (หน้ากาก)</div>
+              <div style="font-size:0.85rem;color:var(--saffron-glow);">สวมหน้ากาก N95 เมื่อดูแลผู้ป่วย</div>
+            </div>
+            <div style="background:rgba(255,255,255,0.1);border-radius:10px;padding:1.2rem;">
+              <div style="font-size:1.5rem;">🪟</div>
+              <div style="font-weight:700;color:var(--saffron-light);">เปิด (ระบายอากาศ)</div>
+              <div style="font-size:0.85rem;color:var(--saffron-glow);">เปิดหน้าต่างให้ลมพัดพาเชื้อออก</div>
+            </div>
+          </div>
         </div>
-
-        <div style="background:rgba(255,255,255,0.1);border:1px solid rgba(201,168,76,0.3);border-radius:12px;padding:1.5rem;backdrop-filter:blur(4px);">
-          <div style="font-size:2rem;margin-bottom:0.5rem;">↔️</div>
-          <div style="font-family:'Noto Serif Thai',serif;font-size:1.2rem;font-weight:900;color:var(--saffron-light);margin-bottom:0.4rem;">ห่าง (ระยะ)</div>
-          <div style="font-size:0.9rem;line-height:1.7;color:var(--saffron-glow);opacity:0.9;">หากทราบว่ามีรูปใดอาพาธ ให้แยกกุฏิทันที หลีกเลี่ยงที่แออัดช่วงระบาด</div>
+        <div style="margin-top:1.5rem;">
+          <div style="font-weight:700;color:var(--maroon);margin-bottom:0.75rem;">🔒 ระยะเวลาแยกตัวเมื่อติดเชื้อ</div>
+          <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,280px),1fr));gap:1.2rem;">
+            <div style="background:#FFF;border-radius:12px;overflow:hidden;box-shadow:0 2px 12px var(--shadow-warm);border-left:4px solid #C0392B;">
+              <div style="padding:1rem 1.2rem;background:#FDEDEC;font-weight:700;color:#C0392B;">หัดแท้</div>
+              <div style="padding:1rem;">≥4 วันหลังผื่นขึ้น (นับจากวันแรกที่มีผื่น)</div>
+            </div>
+            <div style="background:#FFF;border-radius:12px;overflow:hidden;box-shadow:0 2px 12px var(--shadow-warm);border-left:4px solid #7D3C98;">
+              <div style="padding:1rem 1.2rem;background:#F5EEF8;font-weight:700;color:#7D3C98;">หัดเยอรมัน</div>
+              <div style="padding:1rem;">7 วันหลังผื่นขึ้น (แยกนานกว่าหัดแท้)</div>
+            </div>
+            <div style="background:#FFF;border-radius:12px;overflow:hidden;box-shadow:0 2px 12px var(--shadow-warm);border-left:4px solid #D35400;">
+              <div style="padding:1rem 1.2rem;background:#FEF5E7;font-weight:700;color:#D35400;">อีสุกอีใส</div>
+              <div style="padding:1rem;">จนตุ่มสุดท้ายตกสะเก็ด (มัก 5–7 วัน)</div>
+            </div>
+          </div>
         </div>
-
-        <div style="background:rgba(255,255,255,0.1);border:1px solid rgba(201,168,76,0.3);border-radius:12px;padding:1.5rem;backdrop-filter:blur(4px);">
-          <div style="font-size:2rem;margin-bottom:0.5rem;">😷</div>
-          <div style="font-family:'Noto Serif Thai',serif;font-size:1.2rem;font-weight:900;color:var(--saffron-light);margin-bottom:0.4rem;">ปิด (หน้ากาก)</div>
-          <div style="font-size:0.9rem;line-height:1.7;color:var(--saffron-glow);opacity:0.9;">สวมหน้ากากอนามัย (N95 สำหรับดูแลผู้ป่วย) ป้องกันการสูดดมเชื้อในอากาศ</div>
-        </div>
-
-        <div style="background:rgba(255,255,255,0.1);border:1px solid rgba(201,168,76,0.3);border-radius:12px;padding:1.5rem;backdrop-filter:blur(4px);">
-          <div style="font-size:2rem;margin-bottom:0.5rem;">🪟</div>
-          <div style="font-family:'Noto Serif Thai',serif;font-size:1.2rem;font-weight:900;color:var(--saffron-light);margin-bottom:0.4rem;">เปิด (ระบายอากาศ)</div>
-          <div style="font-size:0.9rem;line-height:1.7;color:var(--saffron-glow);opacity:0.9;">เปิดหน้าต่างกุฏิและศาลาให้ลมพัดพาเชื้อออกไป ไม่ให้สะสมในอาคาร</div>
-        </div>
-
       </div>
-    </div>
+    </details>
+
+    <!-- ๓ คาถาป้องกันโรคหิด -->
+    <details class="summary-scabies">
+      <summary><span>🪲</span> คาถาป้องกันโรคหิด</summary>
+      <div class="accordion-body">
+        <p style="color:var(--text-muted);font-size:0.95rem;margin-bottom:1.2rem;">วิธีป้องกันและจัดการสิ่งแวดล้อม — คาถา 3 ซ. สำหรับผู้อยู่ร่วมกันในกุฏิหรือพื้นที่จำกัด</p>
+        <div class="prevent-grid" style="margin-bottom:1.5rem;">
+          <div class="prevent-card" style="border-left-color:#27AE60;">
+            <div class="prevent-letter" style="background:#27AE60;">๑</div>
+            <div class="prevent-title">ซัก</div>
+            <div class="prevent-desc">จีวร สบง ผ้าปูที่นอน ปลอกหมอน — ซักด้วยน้ำร้อน 60°C ขึ้นไป เพื่อฆ่าตัวไรและไข่</div>
+          </div>
+          <div class="prevent-card" style="border-left-color:#2980B9;">
+            <div class="prevent-letter" style="background:#2980B9;">๒</div>
+            <div class="prevent-title">ซุก</div>
+            <div class="prevent-desc">ของที่ซักไม่ได้ (หมอนอิง อาสนะหนา) ใส่ถุงพลาสติกปิดสนิท เก็บทิ้งไว้ 7 วัน ตัวไรไม่มีอาหารจะตาย</div>
+          </div>
+          <div class="prevent-card" style="border-left-color:#8B6914;">
+            <div class="prevent-letter" style="background:#8B6914;">๓</div>
+            <div class="prevent-title">ส่อง</div>
+            <div class="prevent-desc">หมั่นสังเกตกัน หากเห็นใครเกาผิดปกติหรือมีตุ่มตามมือ แจ้งพระอุปัชฌาย์หรือเจ้าอาวาสเพื่อพาไปพบแพทย์ทันที</div>
+          </div>
+        </div>
+        <div style="background:linear-gradient(135deg,#FFF8E7,#FFF3DB);border:2px solid var(--gold);border-radius:12px;padding:1.2rem 1.5rem;text-align:center;font-weight:700;color:var(--maroon);">
+          ☸ คันกลางคืน ตุ่มใสตามง่ามมือ รักษาพร้อมกันทั้งกุฏิ ซักน้ำร้อนฆ่าเชื้อ ☸
+        </div>
+      </div>
+    </details>
   </div>
-
-  <hr class="section-divider" style="margin:2.5rem auto;">
-
-  <!-- ─── หมวด ค: ระยะเวลาแยกตัว ─── -->
-  <div>
-    <div style="display:inline-flex;align-items:center;gap:0.6rem;background:var(--maroon);color:#FFF;padding:0.5rem 1.2rem;border-radius:20px;font-family:'Noto Serif Thai',serif;font-weight:700;font-size:1rem;margin-bottom:0.5rem;">
-      <span>🔒</span> ระยะเวลาแยกตัวเมื่อติดเชื้อ
-    </div>
-    <p style="color:var(--text-muted);font-size:0.92rem;margin-bottom:1.2rem;">แยกกุฏินานแค่ไหนจึงปลอดภัย? — เพื่อป้องกันการระบาดในชุมชนสงฆ์</p>
-
-    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:1.5rem;">
-
-      <!-- หัดแท้ -->
-      <div style="background:#FFF;border-radius:14px;overflow:hidden;box-shadow:0 3px 20px var(--shadow-warm);">
-        <div style="background:linear-gradient(135deg,#C0392B,#E74C3C);padding:1.2rem 1.5rem;color:#FFF;">
-          <div style="font-size:1.5rem;">🔴</div>
-          <div style="font-family:'Noto Serif Thai',serif;font-weight:900;font-size:1.2rem;">หัดแท้ (Measles)</div>
-        </div>
-        <div style="padding:1.5rem;">
-          <div style="display:flex;align-items:center;gap:0.8rem;margin-bottom:1rem;">
-            <div style="flex-shrink:0;width:56px;height:56px;border-radius:50%;background:#FDEDEC;display:flex;align-items:center;justify-content:center;font-family:'Noto Serif Thai',serif;font-weight:900;font-size:1.2rem;color:#C0392B;">≥4</div>
-            <div>
-              <div style="font-weight:700;color:#C0392B;">วันหลังผื่นขึ้น</div>
-              <div style="font-size:0.85rem;color:var(--text-muted);">นับจากวันแรกที่มีผื่น</div>
-            </div>
-          </div>
-          <div style="background:#FDEDEC;padding:0.8rem 1rem;border-radius:8px;font-size:0.9rem;">
-            <strong style="color:#C0392B;">🔑 เกณฑ์จำ: "นับวัน"</strong><br>
-            ครบ 4 วันหลังผื่นมา = พ้นระยะแพร่เชื้อ<br>
-            <span style="font-size:0.82rem;color:var(--text-muted);">(แพร่เชื้อได้ตั้งแต่ 4 วันก่อนผื่นขึ้นด้วย)</span>
-          </div>
-        </div>
-      </div>
-
-      <!-- หัดเยอรมัน -->
-      <div style="background:#FFF;border-radius:14px;overflow:hidden;box-shadow:0 3px 20px var(--shadow-warm);">
-        <div style="background:linear-gradient(135deg,#7D3C98,#9B59B6);padding:1.2rem 1.5rem;color:#FFF;">
-          <div style="font-size:1.5rem;">🟣</div>
-          <div style="font-family:'Noto Serif Thai',serif;font-weight:900;font-size:1.2rem;">หัดเยอรมัน (Rubella)</div>
-        </div>
-        <div style="padding:1.5rem;">
-          <div style="display:flex;align-items:center;gap:0.8rem;margin-bottom:1rem;">
-            <div style="flex-shrink:0;width:56px;height:56px;border-radius:50%;background:#F5EEF8;display:flex;align-items:center;justify-content:center;font-family:'Noto Serif Thai',serif;font-weight:900;font-size:1.2rem;color:#7D3C98;">7</div>
-            <div>
-              <div style="font-weight:700;color:#7D3C98;">วันหลังผื่นขึ้น</div>
-              <div style="font-size:0.85rem;color:var(--text-muted);">แม้อาการดูเบากว่า แต่แยกนานกว่า</div>
-            </div>
-          </div>
-          <div style="background:#F5EEF8;padding:0.8rem 1rem;border-radius:8px;font-size:0.9rem;">
-            <strong style="color:#7D3C98;">🔑 เกณฑ์จำ: "แยกนานกว่าหัดแท้"</strong><br>
-            แม้อาการจะดูเบากว่า แต่ต้องแยกนานกว่า<br>
-            <span style="font-size:0.82rem;color:var(--text-muted);">เพื่อป้องกันการแพร่สู่โยมที่กำลังตั้งครรภ์</span>
-          </div>
-        </div>
-      </div>
-
-      <!-- อีสุกอีใส -->
-      <div style="background:#FFF;border-radius:14px;overflow:hidden;box-shadow:0 3px 20px var(--shadow-warm);">
-        <div style="background:linear-gradient(135deg,#D35400,#E67E22);padding:1.2rem 1.5rem;color:#FFF;">
-          <div style="font-size:1.5rem;">🟠</div>
-          <div style="font-family:'Noto Serif Thai',serif;font-weight:900;font-size:1.2rem;">อีสุกอีใส (Chickenpox)</div>
-        </div>
-        <div style="padding:1.5rem;">
-          <div style="display:flex;align-items:center;gap:0.8rem;margin-bottom:1rem;">
-            <div style="flex-shrink:0;width:56px;height:56px;border-radius:50%;background:#FEF5E7;display:flex;align-items:center;justify-content:center;font-family:'Noto Serif Thai',serif;font-weight:900;font-size:0.85rem;color:#D35400;text-align:center;line-height:1.1;">5–7<br><span style="font-size:0.65rem;">วัน*</span></div>
-            <div>
-              <div style="font-weight:700;color:#D35400;">จนตุ่มสุดท้ายตกสะเก็ด</div>
-              <div style="font-size:0.85rem;color:var(--text-muted);">ไม่ใช่นับวัน แต่ดูจากอาการ</div>
-            </div>
-          </div>
-          <div style="background:#FEF5E7;padding:0.8rem 1rem;border-radius:8px;font-size:0.9rem;">
-            <strong style="color:#D35400;">🔑 เกณฑ์จำ: "ดูอาการ"</strong><br>
-            ตุ่มน้ำทุกตุ่มต้องตกสะเก็ดและแห้งหมด<br>
-            <span style="font-size:0.82rem;color:var(--text-muted);">(มักใช้เวลาประมาณ 5–7 วันหลังเริ่มออกผื่น)</span>
-          </div>
-        </div>
-      </div>
-
-    </div>
-  </div><!-- end ระยะแยกตัว -->
 
 </section>
 
@@ -1889,6 +2099,23 @@ body::before {
       <div><strong>ตรวจสอบประวัติวัคซีน:</strong> สามเณรบวชใหม่ควรตรวจสอบว่าได้รับวัคซีนพื้นฐานครบหรือไม่ หากไม่แน่ใจสามารถขอฉีดเพิ่มได้ที่สถานพยาบาล</div>
     </div>
   </div>
+
+  <div class="monk-tips" style="margin-top: 1.5rem;">
+    <div class="monk-tips-title">🧼 สุขอนามัยส่วนบุคคล (กายสะอาด)</div>
+    <p style="color:var(--text-muted);font-size:0.92rem;margin-bottom:1rem;">การดูแลความสะอาดกายและอัฐบริขาร — ป้องกันโรคผิวหนังและโรคหิดในชุมชนสงฆ์</p>
+    <div class="monk-tip-item">
+      <div class="tip-bullet">๑</div>
+      <div><strong>การสรงน้ำ:</strong> ควรดูแลความสะอาดตามข้อพับและจุดอับชื้น (ซึ่งมักเป็นที่อยู่ของไรหิดหรือเชื้อรา) เช็ดร่างกายให้แห้งสนิทก่อนครองจีวร</div>
+    </div>
+    <div class="monk-tip-item">
+      <div class="tip-bullet">๒</div>
+      <div><strong>การดูแลอัฐบริขาร:</strong> จีวร สบง และอังสะ ควรซักและตากแดดให้แห้งสนิทเพื่อป้องกันกลิ่นอับและโรคผิวหนัง หากมีการระบาดของโรคผิวหนัง (เช่น หิด) ควรซักด้วยน้ำร้อนและแยกราวตาก</div>
+    </div>
+    <div class="monk-tip-item">
+      <div class="tip-bullet">๓</div>
+      <div><strong>ของใช้ส่วนตัว:</strong> แยกผ้าเช็ดตัว ผ้าเช็ดหน้า และสบู่ ไม่ใช้ร่วมกับรูปอื่น เพื่อป้องกันการติดต่อของโรค</div>
+    </div>
+  </div>
 </section>
 
 <div class="divider">◆ ◆ ◆</div>
@@ -1960,7 +2187,39 @@ body::before {
       <div class="faq-a-text">อาการไข้สูงลอยแต่ไม่มีอาการทางระบบหายใจ (ไม่ไอ ไม่มีน้ำมูก) ร่วมกับปวดกระบอกตา ปวดเมื่อยกระดูก อ่อนเพลียมาก ควรนึกถึงไข้เลือดออกเป็นอันดับแรก โดยเฉพาะในช่วงฤดูฝนที่ยุงลายชุกชุม ควรไปพบแพทย์เพื่อตรวจเลือดภายใน 1–2 วันหลังมีไข้</div>
     </div>
   </div>
+
+  <div class="faq-item">
+    <div class="faq-q" onclick="this.parentElement.classList.toggle('open')">
+      คันมากตอนกลางคืน มีตุ่มตามง่ามมือ ควรคิดถึงโรคอะไร?
+      <span class="faq-arrow">▼</span>
+    </div>
+    <div class="faq-a">
+      <div class="faq-a-text">ควรนึกถึง<strong>โรคหิด (Scabies)</strong> เกิดจากตัวไรหิดขนาดเล็กมาก ขุดอุโมงค์ใต้ผิวหนัง อาการเด่นคือคันมากเป็นพิเศษกลางคืน และมักมีตุ่มน้ำใสหรือตุ่มแดงตามง่ามมือ ง่ามเท้า รักแร้ ติดต่อจากการสัมผัสใกล้ชิดและของใช้ร่วมกัน (ผ้าเช็ดตัว ที่นอน สบู่ก้อน จีวร) ในวัดควรแจ้งพระอุปัชฌาย์หรือเจ้าอาวาสเพื่อพาไปพบแพทย์ รักษาด้วยยาทาฆ่าหิด และ<strong>ทุกรูปในกุฏิต้องทายาพร้อมกัน</strong> รวมถึงซักจีวร ผ้าปูที่นอน ด้วยน้ำร้อน (คาถา 3 ซ. — ซัก ซุก ส่อง)</div>
+    </div>
+  </div>
+
+  <div class="faq-item">
+    <div class="faq-q" onclick="this.parentElement.classList.toggle('open')">
+      เมื่อกุฏิมีพระหรือเณรเป็นหิด ทุกรูปที่อยู่ในกุฏิเดียวกันต้องทำอย่างไร?
+      <span class="faq-arrow">▼</span>
+    </div>
+    <div class="faq-a">
+      <div class="faq-a-text">ต้อง<strong>รักษาพร้อมกันทั้งกุฏิ</strong> แม้รูปที่ยังไม่มีอาการคันก็ต้องทายาฆ่าหิด (เช่น Permethrin หรือ Benzyl Benzoate) พร้อมกัน เพื่อตัดวงจรการระบาด จีวร สบง ผ้าปูที่นอน ปลอกหมอน ต้อง<strong>ซักด้วยน้ำร้อน 60°C ขึ้นไป</strong> ของที่ซักไม่ได้ (เช่น หมอนอิง อาสนะหนา) ใส่ถุงปิดสนิทเก็บไว้ 7 วัน ตัวไรจะตาย หมั่นสังเกตกันและกัน หากเห็นใครเกาผิดปกติหรือมีตุ่มตามมือให้แจ้งผู้รับผิดชอบพาไปพบแพทย์ เน้นเมตตาธรรม</div>
+    </div>
+  </div>
 </section>
+
+<!-- โมดัลแกลเลอรีรูปโรค (กดปุ่ม ดูรูป ในการ์ดโรค) -->
+<div class="img-gallery-overlay" id="img-gallery-modal" role="dialog" aria-modal="true" aria-label="แกลเลอรีรูป">
+  <button type="button" class="gallery-close" id="gallery-close" aria-label="ปิด">×</button>
+  <h2 class="gallery-title" id="gallery-title">รูปภาพ</h2>
+  <div class="gallery-grid" id="gallery-grid"></div>
+</div>
+<!-- คลิกรูปเพื่อขยายดูใหญ่ -->
+<div class="lightbox-enlarge" id="lightbox-enlarge" role="dialog" aria-label="รูปขยาย">
+  <button type="button" class="lightbox-close" id="lightbox-close" aria-label="ปิด">×</button>
+  <img id="lightbox-img" src="" alt="">
+</div>
 
 <!-- ═══════════ ทำแบบทดสอบ (ลิงก์ quiz + Apps Script) ═══════════ -->
 <section class="section section-quiz-cta fade-in" id="quiz-cta">
@@ -2003,6 +2262,91 @@ const obs = new IntersectionObserver((entries) => {
 }, { threshold: 0.1 });
 
 document.querySelectorAll('.fade-in').forEach(el => obs.observe(el));
+
+// แกลเลอรีรูปโรค — รายชื่อไฟล์ในโฟลเดอร์ images/ (เพิ่ม/ลดได้ตามไฟล์ที่มี)
+const DISEASE_IMAGES = {
+  measles: ['measles01.jpg', 'measles03.jpg', 'measles08.jpg', 'measles11.jpg'],
+  rubella: ['rubella1.jpg', 'rubella2.jpg', 'rubella3.jpg'],
+  chickenpox: ['chickenpox1.jpg', 'chickenpox2.jpg', 'chickenpox3.jpg', 'chickenpox4.jpg', 'chickenpox5.jpg', 'chickenpox6.jpg', 'chickenpox7.jpg'],
+  dengue: ['dengue1.jpg', 'dengue2.png', 'dengue3.jpg'],
+  scabies: ['scabies1.jpg', 'scabies2.jpg', 'scabies3.jpg', 'scabies4.jpg', 'scabies5.jpg', 'scabies6.jpg', 'scabies-tunnel.png']
+};
+const DISEASE_TITLES = {
+  measles: 'หัดแท้ (Measles)',
+  rubella: 'หัดเยอรมัน (Rubella)',
+  chickenpox: 'อีสุกอีใส (Chickenpox)',
+  dengue: 'ไข้เลือดออก (Dengue)',
+  scabies: 'โรคหิด (Scabies)'
+};
+
+const galleryModal = document.getElementById('img-gallery-modal');
+const galleryTitle = document.getElementById('gallery-title');
+const galleryGrid = document.getElementById('gallery-grid');
+const galleryClose = document.getElementById('gallery-close');
+
+function openGallery(diseaseKey) {
+  const files = DISEASE_IMAGES[diseaseKey];
+  const title = DISEASE_TITLES[diseaseKey] || diseaseKey;
+  if (!files || !files.length) return;
+  galleryTitle.textContent = '🖼️ รูปภาพ — ' + title;
+  galleryGrid.innerHTML = '';
+  files.forEach(function (file) {
+    const img = document.createElement('img');
+    img.src = 'images/' + file;
+    img.alt = title + ' — ' + file;
+    img.loading = 'lazy';
+    img.onerror = function () { this.classList.add('load-fail'); };
+    img.addEventListener('click', function () {
+      openLightbox(this.src, this.alt);
+    });
+    galleryGrid.appendChild(img);
+  });
+  galleryModal.classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function openLightbox(src, alt) {
+  const lb = document.getElementById('lightbox-enlarge');
+  const lbImg = document.getElementById('lightbox-img');
+  if (lb && lbImg) {
+    lbImg.src = src;
+    lbImg.alt = alt || '';
+    lb.classList.add('open');
+  }
+}
+
+function closeLightbox() {
+  const lb = document.getElementById('lightbox-enlarge');
+  if (lb) lb.classList.remove('open');
+}
+
+function closeGallery() {
+  closeLightbox();
+  galleryModal.classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+document.getElementById('lightbox-close').addEventListener('click', closeLightbox);
+document.getElementById('lightbox-enlarge').addEventListener('click', function (e) {
+  if (e.target === this) closeLightbox();
+});
+document.addEventListener('keydown', function (e) {
+  if (e.key === 'Escape') {
+    if (document.getElementById('lightbox-enlarge').classList.contains('open')) closeLightbox();
+    else if (galleryModal.classList.contains('open')) closeGallery();
+  }
+});
+
+document.querySelectorAll('.card-img-link[data-disease]').forEach(function (btn) {
+  btn.addEventListener('click', function (e) {
+    e.preventDefault();
+    openGallery(btn.getAttribute('data-disease'));
+  });
+});
+if (galleryClose) galleryClose.addEventListener('click', closeGallery);
+galleryModal.addEventListener('click', function (e) {
+  if (e.target === galleryModal) closeGallery();
+});
 
 // Hamburger เมนูมือถือ
 const nav = document.getElementById('main-nav');
