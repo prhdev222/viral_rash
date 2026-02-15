@@ -32,6 +32,10 @@ html { scroll-behavior: smooth; }
 body {
   font-family: 'Sarabun', 'Noto Sans Thai', sans-serif;
   background: var(--bg);
+  background-image: url('images/watmoolee1.jpg');
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
   color: var(--text);
   line-height: 1.8;
   font-size: 17px;
@@ -42,7 +46,7 @@ body::before {
   content: '';
   position: fixed;
   inset: 0;
-  background: url("data:image/svg+xml,%3Csvg width='60' height='60' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M30 0L60 30L30 60L0 30z' fill='none' stroke='%23C9A84C' stroke-width='0.3' opacity='0.06'/%3E%3C/svg%3E");
+  background: linear-gradient(180deg, rgba(250, 244, 232, 0.88) 0%, rgba(250, 244, 232, 0.92) 100%);
   pointer-events: none;
   z-index: 0;
 }
