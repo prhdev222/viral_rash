@@ -132,6 +132,31 @@ body::before {
   font-weight: 300;
 }
 
+.hero-pdf-link {
+  position: relative;
+  z-index: 1;
+  display: inline-block;
+  margin-top: 1.5rem;
+  padding: 0.8rem 1.8rem;
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(8px);
+  border: 2px solid var(--saffron-glow);
+  border-radius: 12px;
+  color: var(--saffron-glow);
+  text-decoration: none;
+  font-weight: 700;
+  font-size: 0.85rem;
+  transition: all 0.3s;
+  animation: fadeUp 1s ease-out 0.7s both;
+}
+.hero-pdf-link:hover {
+  background: rgba(255, 255, 255, 0.25);
+  border-color: #FFF;
+  color: #FFF;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(232, 146, 11, 0.4);
+}
+
 .hero-lotus {
   font-size: 3rem;
   position: relative;
@@ -1243,6 +1268,9 @@ body::before {
     ความรู้เรื่องหัด หัดเยอรมัน อีสุกอีใส ไข้เลือดออก และโรคหิด<br>
     สำหรับพระภิกษุและสามเณร — เมตตาธรรมในการดูแลกัน
   </p>
+  <a href="https://drive.google.com/file/d/1W_R2tClktZxL-e9kE46-vRGDUgBP4Sr4/view?usp=drive_link" target="_blank" rel="noopener noreferrer" class="hero-pdf-link">
+    📄 ดาวน์โหลดสรุปเนื้อหา (PDF)
+  </a>
   <div class="hero-lotus">🪷</div>
   <a href="#content-start" class="hero-scroll">▼ เลื่อนลงเพื่ออ่าน</a>
   <a href="menu.html" class="hero-scroll" style="bottom: 4.5rem;">📋 เลือกจากเมนู</a>
