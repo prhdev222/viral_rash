@@ -177,28 +177,77 @@ body::before {
   margin-top: 2rem;
 }
 .menu-quiz-wrap { margin-top: 1rem; }
+.menu-pdf-wrap { margin-top: 1rem; }
 .menu-all {
   display: inline-flex;
   align-items: center;
-  gap: 0.5rem;
-  padding: 1rem 1.75rem;
+  gap: 0.7rem;
+  padding: 1.1rem 2rem;
   background: linear-gradient(135deg, var(--maroon), #8B3A1D);
   color: var(--saffron-glow);
   text-decoration: none;
   font-weight: 700;
-  border-radius: 12px;
+  font-size: 1.05rem;
+  border-radius: 14px;
   border: 2px solid var(--gold);
-  box-shadow: 0 4px 16px var(--shadow-warm);
-  transition: transform 0.2s, box-shadow 0.2s;
+  box-shadow: 0 4px 20px rgba(107, 29, 29, 0.25);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   -webkit-tap-highlight-color: transparent;
+  position: relative;
+  overflow: hidden;
 }
-.menu-all:hover { color: #FFF; }
-.menu-all:active { transform: scale(0.98); }
+.menu-all::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(255,255,255,0.1), transparent);
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+.menu-all:hover::before { opacity: 1; }
+.menu-all:active { transform: scale(0.97); }
+
+/* ปุ่มอ่านทั้งหมด — สีเขียว (ความรู้) */
+.menu-all-read {
+  background: linear-gradient(135deg, #27AE60, #2ECC71);
+  border-color: #1E8449;
+  color: #FFF;
+  box-shadow: 0 4px 20px rgba(39, 174, 96, 0.3);
+}
+.menu-all-read:hover {
+  background: linear-gradient(135deg, #2ECC71, #27AE60);
+  box-shadow: 0 6px 24px rgba(39, 174, 96, 0.4);
+  transform: translateY(-3px);
+}
+
+/* ปุ่มแบบทดสอบ — สีส้ม/ทอง (การทดสอบ) */
+.menu-all-quiz {
+  background: linear-gradient(135deg, var(--saffron), var(--saffron-light));
+  border-color: var(--gold-bright);
+  color: var(--maroon-deep);
+  box-shadow: 0 4px 20px rgba(232, 146, 11, 0.35);
+}
+.menu-all-quiz:hover {
+  background: linear-gradient(135deg, var(--saffron-light), var(--saffron));
+  box-shadow: 0 6px 24px rgba(232, 146, 11, 0.45);
+  transform: translateY(-3px);
+}
+
+/* ปุ่ม PDF — สีน้ำเงิน (เอกสาร) */
+.menu-all-pdf {
+  background: linear-gradient(135deg, #2C6E8A, #3498DB);
+  border-color: #2980B9;
+  color: #FFF;
+  box-shadow: 0 4px 20px rgba(44, 110, 138, 0.3);
+}
+.menu-all-pdf:hover {
+  background: linear-gradient(135deg, #3498DB, #2C6E8A);
+  box-shadow: 0 6px 24px rgba(44, 110, 138, 0.4);
+  transform: translateY(-3px);
+}
+
 @media (hover: hover) {
-  .menu-all:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 6px 20px var(--shadow-warm);
-  }
+  .menu-all:hover { color: inherit; }
 }
 
 /* ── Responsive: มือถือ ── */
@@ -284,10 +333,15 @@ body::before {
   </div>
 
   <div class="menu-all-wrap">
-    <a href="index.html" class="menu-all">📖 อ่านทั้งหมดตั้งแต่ต้น</a>
+    <a href="index.html" class="menu-all menu-all-read">📖 อ่านทั้งหมดตั้งแต่ต้น</a>
   </div>
   <div class="menu-all-wrap menu-quiz-wrap">
-    <a href="quiz.html" class="menu-all">📝 ทำแบบทดสอบหลังเรียนรู้</a>
+    <a href="quiz.html" class="menu-all menu-all-quiz">📝 ทำแบบทดสอบหลังเรียนรู้</a>
+  </div>
+  <div class="menu-all-wrap menu-pdf-wrap">
+    <a href="https://drive.google.com/file/d/1W_R2tClktZxL-e9kE46-vRGDUgBP4Sr4/view?usp=sharing" target="_blank" rel="noopener noreferrer" class="menu-all menu-all-pdf">
+      📄 ดาวน์โหลดสรุปเนื้อหา (PDF)
+    </a>
   </div>
 </main>
 
